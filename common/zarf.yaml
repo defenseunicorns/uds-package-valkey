@@ -1,0 +1,39 @@
+kind: ZarfPackageConfig
+metadata:
+  name: uds-valkey-common
+  description: "UDS Valkey Common"
+  url: https://github.com/valkey-io/valkey
+
+components:
+  - name: valkey
+    required: true
+    charts:
+      - name: uds-valkey-config
+        namespace: valkey
+        version: 0.1.0
+        localPath: ../chart
+      - name: valkey
+        version: 0.3.5
+        namespace: valkey
+        url: oci://registry-1.docker.io/bitnamicharts/valkey
+        valuesFiles:
+          - ../values/values.yaml
+    actions:
+      onDeploy:
+        after:
+          - description: Validate Valkey Package
+            maxTotalSeconds: 300
+            wait:
+              cluster:
+                kind: Packages
+                name: valkey
+                namespace: valkey
+                condition: "'{.status.phase}'=Ready"
+          - description: Valkey to be Healthy
+            maxTotalSeconds: 90
+            wait:
+              cluster:
+                kind: pod
+                name: app.kubernetes.io/name=valkey
+                namespace: valkey
+                condition: Ready

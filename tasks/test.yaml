@@ -1,0 +1,14 @@
+tasks:
+#   - name: create-data-stores
+#     actions:
+
+
+  - name: health-check
+    actions:
+      - description: Valkey Status
+        wait:
+          cluster:
+            kind: pod
+            name: app.kubernetes.io/name=valkey
+            namespace: valkey
+            condition: Ready

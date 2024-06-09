@@ -1,0 +1,22 @@
+kind: ZarfPackageConfig
+metadata:
+  name: valkey
+  description: "A deployment of Valkey (a Redis alternative by the Linux Foundation)"
+  url: https://github.com/valkey-io/valkey
+  # x-release-please-start-version
+  version: "7.2.5-uds.0"
+  # x-release-please-end
+
+components:
+  - name: valkey
+    required: true
+    only:
+      flavor: upstream
+    import:
+      path: common
+    charts:
+      - name: valkey
+        valuesFiles:
+          - ./values/upstream-values.yaml
+    images:
+      - docker.io/bitnami/valkey:7.2.5-debian-12-r5

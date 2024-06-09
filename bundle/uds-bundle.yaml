@@ -1,0 +1,30 @@
+kind: UDSBundle
+metadata:
+  name: valkey-test
+  description: A UDS bundle for deploying Valkey and on a development cluster
+  # x-release-please-start-version
+  version: 7.2.5-uds.0
+  # x-release-please-end
+
+packages:
+  # - name: dev-namespaces
+  #   path: ../
+  #   ref: 0.1.0
+  - name: valkey
+    path: ../
+    # x-release-please-start-version
+    ref: 7.2.5-uds.0
+    # x-release-please-end
+    overrides:
+      valkey:
+        valkey:
+          variables:
+            - name: VALKEY_RESOURCES
+              path: "master.resources"
+              default:
+                limits:
+                  cpu: 100m
+                  memory: 300Mi
+                requests:
+                  cpu: 100m
+                  memory: 300Mi
