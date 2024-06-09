@@ -1,0 +1,12 @@
+apiVersion: uds.dev/v1alpha1
+kind: Package
+metadata:
+  name: valkey
+  namespace: {{ .Release.Namespace }}
+spec:
+  network:
+    allow:
+      - direction: Ingress
+        remoteGenerated: IntraNamespace
+      - direction: Egress
+        remoteGenerated: IntraNamespace
