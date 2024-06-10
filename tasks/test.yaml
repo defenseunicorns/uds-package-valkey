@@ -1,7 +1,10 @@
 tasks:
-#   - name: create-data-stores
-#     actions:
-
+  - name: setup-data-stores
+    actions:
+      - description: Create the data store test package for the Valkey instance
+        cmd: uds zarf package create tests --confirm --no-progress --architecture=${UDS_ARCH} --skip-sbom
+      - description: Deploy the test package into the cluster
+        cmd: uds zarf package deploy zarf-package-valkey-test-${UDS_ARCH}-0.1.0.tar.zst --confirm
 
   - name: health-check
     actions:

@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valkey-cli-deployment
+spec:
+  selector:
+    matchLabels:
+      app: valkey-cli
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: valkey-cli
+    spec:
+      containers:
+      - name: valkey-cli
+        image: docker.io/bitnami/valkey:7.2.5-debian-12-r5

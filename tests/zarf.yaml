@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: valkey-test
+  description: "A test that Valkey can be connected to and is functional"
+  version: 0.1.0
+
+components:
+  - name: test-valkey-connectivity
+    required: true
+    manifests:
+      - name: valkey-cli
+        namespace: valkey-cli
+        files:
+          - valkey/valkey-cli.yaml
+    images:
+      - docker.io/bitnami/valkey:7.2.5-debian-12-r5
+    actions:
+      onDeploy:
+        after:
+          - cmd: ./zarf tools kubectl get secret -n valkey valkey --template='{{ index .data "valkey-password" }}' | base64 -d
+            mute: true
+            setVariables:
+              - name: VALKEY_PASSWORD
+          - cmd: echo $VALKEY_PASSWORD
