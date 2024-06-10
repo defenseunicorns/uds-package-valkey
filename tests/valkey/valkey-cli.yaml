@@ -13,5 +13,12 @@ spec:
         app: valkey-cli
     spec:
       containers:
-      - name: valkey-cli
-        image: docker.io/bitnami/valkey:7.2.5-debian-12-r5
+        - name: valkey-cli
+          image: docker.io/bitnami/valkey:7.2.5-debian-12-r5
+          resources:
+            limits:
+              cpu: 100m
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
