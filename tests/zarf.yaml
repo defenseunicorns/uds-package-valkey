@@ -22,5 +22,12 @@ components:
             mute: true
             setVariables:
               - name: VALKEY_PASSWORD
-          - cmd: echo ${ZARF_VAR_VALKEY_PASSWORD}
-          # TODO: (@WSTARR) Wire up `valkey-cli -h valkey-master.valkey.svc.cluster.local -a ${ZARF_VAR_VALKEY_PASSWORD}`
+                sensitive: true
+          - cmd: |
+              ./zarf tools kubectl exec -n valkey-cli valkey-cli -c valkey-cli -- \
+                sh -c "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey-master.valkey.svc.cluster.local -a ${ZARF_VAR_VALKEY_PASSWORD}"
+            setVariables:
+              - name: VALKEY_OUTPUT
+          - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep PONG
+          - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep OK
+          - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep bar
