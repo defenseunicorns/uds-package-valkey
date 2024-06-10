@@ -9,8 +9,8 @@ spec:
     mode: STRICT
   selector:
     matchLabels:
-      cluster-name: pg-cluster
+      app.kubernetes.io/instance: valkey
   portLevelMtls:
-    "5432":
+    "6379":
       mode: PERMISSIVE
 {{- end }}

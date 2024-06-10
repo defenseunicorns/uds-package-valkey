@@ -7,9 +7,6 @@ metadata:
   # x-release-please-end
 
 packages:
-  # - name: dev-namespaces
-  #   path: ../
-  #   ref: 0.1.0
   - name: valkey
     path: ../
     # x-release-please-start-version
@@ -17,6 +14,18 @@ packages:
     # x-release-please-end
     overrides:
       valkey:
+        uds-valkey-config:
+          values:
+            - path: custom
+              value:
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: valkey-cli
+                  remoteSelector:
+                    app: valkey-cli
+                  port: 6379
+                  description: "Ingress from Valkey CLI (for tests)"
         valkey:
           variables:
             - name: VALKEY_RESOURCES

@@ -22,4 +22,5 @@ components:
             mute: true
             setVariables:
               - name: VALKEY_PASSWORD
-          - cmd: echo $VALKEY_PASSWORD
+          - cmd: echo ${ZARF_VAR_VALKEY_PASSWORD}
+          # TODO: (@WSTARR) Wire up `valkey-cli -h valkey-master.valkey.svc.cluster.local -a ${ZARF_VAR_VALKEY_PASSWORD}`
