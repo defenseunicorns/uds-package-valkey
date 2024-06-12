@@ -1,0 +1,5 @@
+kind: Namespace
+metadata:
+  name: valkey-cli
+  labels:
+    istio-injection: enabled

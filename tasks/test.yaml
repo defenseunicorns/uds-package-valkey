@@ -1,0 +1,17 @@
+tasks:
+  - name: setup-data-stores
+    actions:
+      - description: Create the data store test package for the Valkey instance
+        cmd: uds zarf package create tests --confirm --no-progress --architecture=${UDS_ARCH} --skip-sbom --no-progress
+      - description: Deploy the test package into the cluster
+        cmd: uds zarf package deploy zarf-package-valkey-test-${UDS_ARCH}-0.1.0.tar.zst --confirm --no-progress
+
+  - name: health-check
+    actions:
+      - description: Valkey Status
+        wait:
+          cluster:
+            kind: pod
+            name: app.kubernetes.io/name=valkey
+            namespace: valkey
+            condition: Ready

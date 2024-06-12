@@ -1,0 +1,65 @@
+includes:
+  - test: ./tasks/test.yaml
+  - create: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.4.6/tasks/create.yaml
+  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.4.6/tasks/lint.yaml
+  - pull: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.4.6/tasks/pull.yaml
+  - deploy: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.4.6/tasks/deploy.yaml
+  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.4.6/tasks/setup.yaml
+
+tasks:
+  - name: default
+    description: Create K3D Cluster with UDS-Core-Istio + Valkey
+    actions:
+      - task: create-vk-test-bundle
+      - task: setup:k3d-test-cluster
+      - task: deploy:test-bundle
+
+  - name: create-vk-package
+    description: Create UDS Valkey Package
+    actions:
+      - task: create:package
+        with:
+          options: "--skip-sbom"
+
+  - name: create-vk-test-bundle
+    description: Create UDS Valkey bundle
+    actions:
+      - task: create-vk-package
+      - task: create:test-bundle
+
+  - name: create-vk-latest-release-bundle
+    description: Create UDS Valkey bundle based on the latest release
+    actions:
+      - task: pull:latest-package-release
+        with:
+          spoof_release: "true"
+      - task: create:test-bundle
+
+  - name: dev
+    description: Deploy Valkey on existing cluster
+    actions:
+      - task: create-vk-package
+      - task: create-vk-test-bundle
+      - task: deploy:test-bundle
+
+# CI will execute the following (via uds-common/.github/actions/test) so they need to be here with these names
+
+  - name: test-package
+    description: Test the health of a Valkey deployment
+    actions:
+      - task: create-vk-test-bundle
+      - task: setup:k3d-test-cluster
+      - task: deploy:test-bundle
+      - task: test:health-check
+      - task: test:setup-data-stores
+
+  - name: test-upgrade
+    description: Test an upgrade from the latest released package to the current branch
+    actions:
+      - task: create-vk-latest-release-bundle
+      - task: setup:k3d-test-cluster
+      - task: deploy:test-bundle
+      - task: create-vk-test-bundle
+      - task: deploy:test-bundle
+      - task: test:health-check
+      - task: test:setup-data-stores

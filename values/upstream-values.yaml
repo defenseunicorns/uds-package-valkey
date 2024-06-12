@@ -1,0 +1,4 @@
+image:
+  registry: docker.io
+  repository: bitnami/valkey
+  tag: 7.2.5-debian-12-r5

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valkey-cli
+  namespace: valkey-cli
+  labels:
+    app: valkey-cli
+spec:
+  containers:
+    - name: valkey-cli
+      image: docker.io/bitnami/valkey:7.2.5-debian-12-r5
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do echo hello; sleep 10;done"]
+      resources:
+        limits:
+          cpu: 100m
+          memory: 300Mi
+        requests:
+          cpu: 100m
+          memory: 300Mi
