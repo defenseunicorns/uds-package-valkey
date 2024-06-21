@@ -1,4 +1,9 @@
 tasks:
+  - name: all
+    actions:
+      - task: health-check
+      - task: setup-data-stores
+
   - name: setup-data-stores
     actions:
       - description: Create the data store test package for the Valkey instance
