@@ -5,7 +5,7 @@
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/defenseunicorns/uds-package-valkey/badge)](https://api.securityscorecards.dev/projects/github.com/defenseunicorns/uds-package-valkey)
 
 > [!WARNING]  
-> `uds-package-valkey` is in early alpha and is not ready for general consumption.
+> `uds-package-valkey` is in early alpha and is not ready for general consumption.  It is currently only supported as a provider of Redis to [`uds-package-gitlab`](https://github.com/defenseunicorns/uds-package-gitlab)
 
 This package is designed for use as part of a [UDS Software Factory](https://github.com/defenseunicorns/uds-software-factory) bundle deployed on [UDS Core](https://github.com/defenseunicorns/uds-core).
 
