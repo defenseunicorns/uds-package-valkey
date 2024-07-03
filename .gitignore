@@ -4,4 +4,5 @@ build/
 .DS_Store
 *.tar.zst
 zarf-sbom
+.vscode/
 tmp/
