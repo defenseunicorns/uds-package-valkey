@@ -19,7 +19,7 @@ components:
     actions:
       onDeploy:
         after:
-          - cmd: ./zarf tools kubectl get secret -n valkey valkey --template='{{ index .data "valkey-password" }}' | base64 -d
+          - cmd: ./zarf tools kubectl get secret -n valkey-cli valkey --template='{{ index .data "valkey-password" }}' | base64 -d
             mute: true
             setVariables:
               - name: VALKEY_PASSWORD

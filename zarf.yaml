@@ -19,4 +19,4 @@ components:
         valuesFiles:
           - ./values/upstream-values.yaml
     images:
-      - docker.io/bitnami/valkey:7.2.5-debian-12-r5
+      - docker.io/valkey/valkey:7.2.5-alpine3.19

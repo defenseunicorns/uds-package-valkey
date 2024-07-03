@@ -1,1 +1,7 @@
+copyPassword:
+  enabled: false
+  namespace: ""
+  secretName: ""
+  secretKey: ""
+
 custom: []
