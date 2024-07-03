@@ -1,9 +1,9 @@
 includes:
   - test: ./test.yaml
-  - create: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/create.yaml
-  - deploy: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/deploy.yaml
-  - publish: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/publish.yaml
-  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.6.1/tasks/setup.yaml
+  - create: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.7.1/tasks/create.yaml
+  - deploy: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.7.1/tasks/deploy.yaml
+  - publish: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.7.1/tasks/publish.yaml
+  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v0.7.1/tasks/setup.yaml
 
 tasks:
   - name: package
