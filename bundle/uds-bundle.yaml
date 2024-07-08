@@ -26,6 +26,12 @@ packages:
                     app: valkey-cli
                   port: 6379
                   description: "Ingress from Valkey CLI (for tests)"
+            - path: copyPassword
+              value:
+                enabled: true
+                namespace: valkey-cli
+                secretName: valkey
+                secretKey: valkey-password
         valkey:
           variables:
             - name: VALKEY_RESOURCES
