@@ -20,8 +20,6 @@ components:
           - ../values/values.yaml
     actions:
       onDeploy:
-        before:
-          - cmd: ./zarf tools kubectl annotate secret --overwrite -n valkey valkey meta.helm.sh/release-name=uds-valkey-config || true
         after:
           - description: Validate Valkey Package
             maxTotalSeconds: 300

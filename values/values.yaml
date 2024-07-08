@@ -1,5 +1,5 @@
 architecture: standalone
 
 auth:
-  existingSecret: valkey
+  existingSecret: valkey-password
   existingSecretPasswordKey: valkey-password
