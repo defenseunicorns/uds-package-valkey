@@ -1,0 +1,16 @@
+apiVersion: uds.dev/v1alpha1
+kind: Package
+metadata:
+  name: valkey-cli
+  namespace: valkey-cli
+spec:
+  network:
+    allow:
+      - direction: Egress
+        selector:
+          app: valkey-cli
+        remoteNamespace: valkey
+        remoteSelector:
+          app.kubernetes.io/name: valkey
+        port: 6379
+        description: "Egress from Valkey CLI (for tests)"
