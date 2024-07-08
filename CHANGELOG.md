@@ -10,6 +10,7 @@
 
 ### Miscellaneous
 
+* hotfix the arm64 runner name ([#18](https://github.com/defenseunicorns/uds-package-valkey/issues/18)) ([00d49ce](https://github.com/defenseunicorns/uds-package-valkey/commit/00d49ceb08b12f2d1fcb79801a051f16cbc0d53d))
 * add pre release testing and publish arm package ([#12](https://github.com/defenseunicorns/uds-package-valkey/issues/12)) ([543a3a6](https://github.com/defenseunicorns/uds-package-valkey/commit/543a3a6fdeae50290684ddadb52d89e6fdb61f05))
 * **deps:** update support-deps to v4.3.4 ([#17](https://github.com/defenseunicorns/uds-package-valkey/issues/17)) ([a43a254](https://github.com/defenseunicorns/uds-package-valkey/commit/a43a254025082cd4d28972af090d7968a3cd448a))
 * **deps:** update valkey package dependencies ([#10](https://github.com/defenseunicorns/uds-package-valkey/issues/10)) ([df9af9f](https://github.com/defenseunicorns/uds-package-valkey/commit/df9af9f0530d1aaebf6da9e3edcbafeeddb118b1))
