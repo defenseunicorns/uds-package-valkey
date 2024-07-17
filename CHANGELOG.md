@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.2.5-uds.2](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.5-uds.1...v7.2.5-uds.2) (2024-07-17)
+
+
+### Bug Fixes
+
+* update secret templating to reuse when secret already exists ([#23](https://github.com/defenseunicorns/uds-package-valkey/issues/23)) ([e7fc2dc](https://github.com/defenseunicorns/uds-package-valkey/commit/e7fc2dcacc9aea571b6530eab0e1fa253c5420fa))
+
 ## [7.2.5-uds.1](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.5-uds.0...v7.2.5-uds.1) (2024-07-08)
 
 
