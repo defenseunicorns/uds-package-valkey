@@ -3,3 +3,8 @@ architecture: standalone
 auth:
   existingSecret: valkey-password
   existingSecretPasswordKey: valkey-password
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
