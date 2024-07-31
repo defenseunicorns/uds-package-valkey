@@ -19,5 +19,5 @@ components:
         valuesFiles:
           - ./values/upstream-values.yaml
     images:
-      - docker.io/bitnami/valkey:7.2.5-debian-12-r6
+      - docker.io/bitnami/valkey:7.2.5-debian-12-r9
       - docker.io/bitnami/redis-exporter:1.62.0-debian-12-r2
