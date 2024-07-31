@@ -4,6 +4,13 @@ metadata:
   name: valkey
   namespace: {{ .Release.Namespace }}
 spec:
+  monitor:
+    - selector:
+        app.kubernetes.io/name: valkey
+      targetPort: 9121
+      portName: http-metrics
+      description: Metrics
+    
   network:
     allow:
       - direction: Ingress
