@@ -1,5 +1,21 @@
 # Changelog
 
+## [7.2.6-uds.0](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.5-uds.2...v7.2.6-uds.0) (2024-07-31)
+
+
+### Features
+
+* enable prometheus metrics to be Made for UDS ([#28](https://github.com/defenseunicorns/uds-package-valkey/issues/28)) ([a05f79e](https://github.com/defenseunicorns/uds-package-valkey/commit/a05f79e80a524b51ed950247b16cc3795da444f9))
+
+
+### Miscellaneous
+
+* **deps:** update support-deps to v3.25.15 ([#26](https://github.com/defenseunicorns/uds-package-valkey/issues/26)) ([c5ad30c](https://github.com/defenseunicorns/uds-package-valkey/commit/c5ad30cdfb1c3df722afa3cb82e46fe784e681fd))
+* **deps:** update valkey package dependencies ([#20](https://github.com/defenseunicorns/uds-package-valkey/issues/20)) ([72e7bff](https://github.com/defenseunicorns/uds-package-valkey/commit/72e7bff748c16018246cfc07ad85e10c25606492))
+* **deps:** update valkey package dependencies ([#29](https://github.com/defenseunicorns/uds-package-valkey/issues/29)) ([770953b](https://github.com/defenseunicorns/uds-package-valkey/commit/770953b180d22906ed1a41db40f9ecc93648c924))
+* **deps:** update valkey support dependencies ([#21](https://github.com/defenseunicorns/uds-package-valkey/issues/21)) ([9c0040e](https://github.com/defenseunicorns/uds-package-valkey/commit/9c0040ee6068d1c1a35588bbb90dd847b4dce4a7))
+* **deps:** update valkey support dependencies ([#27](https://github.com/defenseunicorns/uds-package-valkey/issues/27)) ([7e1775a](https://github.com/defenseunicorns/uds-package-valkey/commit/7e1775aa18714ac5ad5552248ad10875be1cb764))
+
 ## [7.2.5-uds.2](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.5-uds.1...v7.2.5-uds.2) (2024-07-17)
 
 
