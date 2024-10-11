@@ -44,5 +44,4 @@ jobs:
     uses: defenseunicorns/uds-common/.github/workflows/callable-publish.yaml@f0164622ffc2007e96a0e1deaa3f5064db04b148 # v1.1.0
     with:
       flavor: ${{ matrix.flavor }}
-      reports-path: "tests/.playwright/reports/"
     secrets: inherit # Inherits all secrets from the parent workflow.
