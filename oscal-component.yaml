@@ -26,6 +26,7 @@ component-definition:
         - role-id: provider
           party-uuids:
             - f3cf70f8-ba44-4e55-9ea3-389ef24847d3
+      control-implementations: []
   back-matter:
     resources:
       - uuid: 212903e3-485b-422e-9195-5b84fe2c0e29
