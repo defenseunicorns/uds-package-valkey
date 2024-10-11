@@ -1,0 +1,31 @@
+component-definition:
+  uuid: 22ec1e8e-a761-4a97-9f18-1baf529a58ba
+  metadata:
+    title: UDS Package Valkey
+    last-modified: "2023-11-29T17:48:16Z"
+    version: "20231129"
+    oscal-version: 1.1.2
+    parties:
+      - uuid: f3cf70f8-ba44-4e55-9ea3-389ef24847d3
+        type: organization
+        name: Defense Unicorns
+        links:
+          - href: https://defenseunicorns.com
+            rel: website
+  components:
+    - uuid: e23812d8-7536-4af7-93d5-9106bd024f18
+      type: software
+      title: Valkey
+      description: |
+        Valkey is an open-source in-memory storage, used as a distributed, in-memory key-value database, cache and message broker, with optional durability.
+      purpose: Provides other applications with a key-value store to use for caching, inter-process communication or other small data exchanges.
+      responsible-roles:
+        - role-id: provider
+          party-uuids:
+            - f3cf70f8-ba44-4e55-9ea3-389ef24847d3
+  back-matter:
+    resources:
+      - uuid: 212903e3-485b-422e-9195-5b84fe2c0e29
+        title: UDS Package Valkey
+        rlinks:
+          - href: https://github.com/defenseunicorns/uds-package-valkey
