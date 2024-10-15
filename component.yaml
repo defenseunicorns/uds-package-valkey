@@ -1,0 +1,70 @@
+component-definition:
+  components:
+    - control-implementations:
+        - description: Control Implementation Description
+          implemented-requirements:
+            - control-id: ac-1
+              description: <how the specified control may be implemented if the containing component or capability is instantiated in a system security plan>
+              remarks: |
+                STATEMENT:
+                a. Develop, document, and disseminate to [Assignment: organization-defined organization-defined personnel or roles]:
+                	1. [Selection: (one-or-more) organization-defined organization-level; mission/business process-level; system-level] access control policy that:
+                		(a) Addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance; and
+                		(b) Is consistent with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines; and
+                	2. Procedures to facilitate the implementation of the access control policy and the associated access controls;
+                b. Designate an [Assignment: organization-defined official] to manage the development, documentation, and dissemination of the access control policy and procedures; and
+                c. Review and update the current access control:
+                	1. Policy [Assignment: organization-defined frequency] and following [Assignment: organization-defined events] ; and
+                	2. Procedures [Assignment: organization-defined frequency] and following [Assignment: organization-defined events].
+              uuid: f38667c9-57da-4391-8f87-7b9da233a73f
+            - control-id: ac-2
+              description: <how the specified control may be implemented if the containing component or capability is instantiated in a system security plan>
+              remarks: |
+                STATEMENT:
+                a. Define and document the types of accounts allowed and specifically prohibited for use within the system;
+                b. Assign account managers;
+                c. Require [Assignment: organization-defined prerequisites and criteria] for group and role membership;
+                d. Specify:
+                	1. Authorized users of the system;
+                	2. Group and role membership; and
+                	3. Access authorizations (i.e., privileges) and [Assignment: organization-defined attributes (as required)] for each account;
+                e. Require approvals by [Assignment: organization-defined personnel or roles] for requests to create accounts;
+                f. Create, enable, modify, disable, and remove accounts in accordance with [Assignment: organization-defined policy, procedures, prerequisites, and criteria];
+                g. Monitor the use of accounts;
+                h. Notify account managers and [Assignment: organization-defined personnel or roles] within:
+                	1. [Assignment: organization-defined time period] when accounts are no longer required;
+                	2. [Assignment: organization-defined time period] when users are terminated or transferred; and
+                	3. [Assignment: organization-defined time period] when system usage or need-to-know changes for an individual;
+                i. Authorize access to the system based on:
+                	1. A valid access authorization;
+                	2. Intended system usage; and
+                	3. [Assignment: organization-defined attributes (as required)];
+                j. Review accounts for compliance with account management requirements [Assignment: organization-defined frequency];
+                k. Establish and implement a process for changing shared or group account authenticators (if deployed) when individuals are removed from the group; and
+                l. Align account management processes with personnel termination and transfer processes.
+              uuid: f36f5665-921b-466e-abf0-792e64d0ba5d
+            - control-id: au-5
+              description: <how the specified control may be implemented if the containing component or capability is instantiated in a system security plan>
+              remarks: |
+                STATEMENT:
+                a. Alert [Assignment: organization-defined personnel or roles] within [Assignment: organization-defined time period] in the event of an audit logging process failure; and
+                b. Take the following additional actions: [Assignment: organization-defined additional actions].
+              uuid: 8cc6e60e-8952-45cb-ad22-7439f56df851
+          props:
+            - name: generation
+              ns: https://docs.lula.dev/oscal/ns
+              value: lula generate component --catalog-source https://raw.githubusercontent.com/usnistgov/oscal-content/master/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_catalog.json --component 'Component Title' --requirements ac-1,ac-2,au-5 --remarks statement
+          source: https://raw.githubusercontent.com/usnistgov/oscal-content/master/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_catalog.json
+          uuid: a3039927-839c-5745-ac4e-a9993bcd60ed
+      description: Component Description
+      title: Component Title
+      type: software
+      uuid: b0bc870b-43af-4be3-9c47-d745e347b7f7
+  metadata:
+    last-modified: 2024-10-15T11:54:40.608420973-06:00
+    oscal-version: 1.1.2
+    published: 2024-10-15T11:54:40.608420973-06:00
+    remarks: Lula Generated Component Definition
+    title: Component Title
+    version: 0.0.1
+  uuid: 4b19a3d8-18b9-4df1-9480-3b1c8f99b73e
