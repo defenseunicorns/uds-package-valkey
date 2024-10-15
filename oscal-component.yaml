@@ -30,7 +30,15 @@ component-definition:
         - uuid: d2afb4c4-2cd8-5305-a6cc-d1bc7b388d0c
           source: https://raw.githubusercontent.com/GSA/fedramp-automation/93ca0e20ff5e54fc04140613476fba80f08e3c7d/dist/content/rev5/baselines/json/FedRAMP_rev5_HIGH-baseline-resolved-profile_catalog.json
           description: Controls implemented by Valkey for inheritance by applications that adheres to FedRAMP High Baseline and DoD IL 6.
-          implemented-requirements: []
+          implemented-requirements:
+            - uuid: bf993771-afb7-4993-a66b-c8e91b281370
+              control-id: cm-3.6
+              description: >-
+                Valkey utilizes the underlying Istio for FIPS encryption in transit and leverages a properly configured Kubernetes storage class for encryption at rest.
+            - uuid: d26bdc9d-767d-4237-9487-64085d8438eb
+              control-id: sc-13
+              description: >-
+                Valkey utilizes the underlying Istio for FIPS encryption in transit and leverages a properly configured Kubernetes storage class for encryption at rest.
   back-matter:
     resources:
       - uuid: 212903e3-485b-422e-9195-5b84fe2c0e29
