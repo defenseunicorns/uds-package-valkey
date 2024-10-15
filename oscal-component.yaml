@@ -5,8 +5,8 @@ component-definition:
   uuid: 22ec1e8e-a761-4a97-9f18-1baf529a58ba
   metadata:
     title: UDS Package Valkey
-    last-modified: "2023-11-29T17:48:16Z"
-    version: "20231129"
+    last-modified: "2024-10-15T19:57:32Z"
+    version: "20241015"
     oscal-version: 1.1.2
     parties:
       - uuid: f3cf70f8-ba44-4e55-9ea3-389ef24847d3
