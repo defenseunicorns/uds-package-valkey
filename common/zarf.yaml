@@ -16,7 +16,7 @@ components:
         version: 0.1.0
         localPath: ../chart
       - name: valkey
-        version: 0.3.13
+        version: 0.3.17
         namespace: valkey
         url: oci://registry-1.docker.io/bitnamicharts/valkey
         valuesFiles:
