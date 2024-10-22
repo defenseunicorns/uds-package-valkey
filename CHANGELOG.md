@@ -1,5 +1,15 @@
 # Changelog
 
+## [7.2.7-uds.0](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.6-uds.0...v7.2.7-uds.0) (2024-10-22)
+
+
+### Miscellaneous
+
+* **deps:** update support-deps to v1.1.1 ([#36](https://github.com/defenseunicorns/uds-package-valkey/issues/36)) ([2fb138e](https://github.com/defenseunicorns/uds-package-valkey/commit/2fb138ee870d5b3583d265937883d982dc0d7c51))
+* **deps:** update support-deps to v1.1.2 ([#37](https://github.com/defenseunicorns/uds-package-valkey/issues/37)) ([5deab7f](https://github.com/defenseunicorns/uds-package-valkey/commit/5deab7f696d5119c282b284d54e1fead38f6d579))
+* **deps:** update valkey package dependencies ([#31](https://github.com/defenseunicorns/uds-package-valkey/issues/31)) ([87a2148](https://github.com/defenseunicorns/uds-package-valkey/commit/87a21488f8ae59fdce928b5ef37aa33ffa532edb))
+* **deps:** update valkey support dependencies ([#30](https://github.com/defenseunicorns/uds-package-valkey/issues/30)) ([b5d79c3](https://github.com/defenseunicorns/uds-package-valkey/commit/b5d79c3f98e4d25250686d859e829d5384f30abd))
+
 ## [7.2.6-uds.0](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.5-uds.2...v7.2.6-uds.0) (2024-07-31)
 
 
