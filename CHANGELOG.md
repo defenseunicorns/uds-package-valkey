@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.2.7-uds.1](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.7-uds.0...v7.2.7-uds.1) (2024-10-24)
+
+
+### Miscellaneous
+
+* set fail-fast to true on test matrix ([#42](https://github.com/defenseunicorns/uds-package-valkey/issues/42)) ([1a04f76](https://github.com/defenseunicorns/uds-package-valkey/commit/1a04f7690cedc0f7d9a096fa26cf6dbaba3cd797))
+* silver badge, streamline README and GH permissions ([#40](https://github.com/defenseunicorns/uds-package-valkey/issues/40)) ([f413d11](https://github.com/defenseunicorns/uds-package-valkey/commit/f413d1163c84d159f5df3fc85e2c60ed30894e6a))
+
 ## [7.2.7-uds.0](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.6-uds.0...v7.2.7-uds.0) (2024-10-22)
 
 
