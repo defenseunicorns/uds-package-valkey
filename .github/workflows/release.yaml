@@ -36,13 +36,10 @@ jobs:
     if: ${{ needs.tag-new-version.outputs.release_created == 'true' }}
     strategy:
       matrix:
-        flavor: [upstream]
+        flavor: [upstream, unicorn]
         architecture: [amd64, arm64]
-        exclude:
-          - flavor: registry1
-            architecture: arm64
     uses: defenseunicorns/uds-common/.github/workflows/callable-publish.yaml@c52077c870a576d01f169f96d74d1b393c6488ba # v1.1.2
     with:
       flavor: ${{ matrix.flavor }}
-      runsOn: ${{ matrix.architecture == 'arm64' && 'uds-swf-ubuntu-arm64-4-core' || 'ubuntu-latest' }}
+      runsOn: ${{ matrix.architecture == 'arm64' && 'uds-marketplace-ubuntu-arm64-4-core' || 'uds-marketplace-ubuntu-big-boy-4-core' }}
     secrets: inherit # Inherits all secrets from the parent workflow.
