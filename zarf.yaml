@@ -38,4 +38,3 @@ components:
     images:
       - cgr.dev/du-uds-defenseunicorns/valkey:7.2.6
       - cgr.dev/du-uds-defenseunicorns/prometheus-redis-exporter:1.65.0
-
