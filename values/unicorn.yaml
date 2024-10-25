@@ -2,12 +2,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
 
 image:
-  registry: docker.io
-  repository: bitnami/valkey
+  repository: cgr.dev/du-uds-defenseunicorns/valkey
   tag: 7.2.6
 
 metrics:
   image:
-    registry: docker.io
-    repository: bitnami/redis-exporter
+    repository: cgr.dev/du-uds-defenseunicorns/prometheus-redis-exporter
     tag: 1.65.0
