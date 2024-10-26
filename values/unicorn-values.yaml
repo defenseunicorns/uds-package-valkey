@@ -1,0 +1,13 @@
+# Copyright 2024 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
+image:
+  registry: cgr.dev
+  repository: du-uds-defenseunicorns/valkey
+  tag: 7.2.6
+
+metrics:
+  image:
+    registry: cgr.dev
+    repository: du-uds-defenseunicorns/prometheus-redis-exporter-bitnami
+    tag: 1.65.0
