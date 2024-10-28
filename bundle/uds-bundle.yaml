@@ -6,14 +6,14 @@ metadata:
   name: valkey-test
   description: A UDS bundle for deploying Valkey and on a development cluster
   # x-release-please-start-version
-  version: 7.2.7-uds.0
+  version: 8.0.1-uds.0
   # x-release-please-end
 
 packages:
   - name: valkey
     path: ../
     # x-release-please-start-version
-    ref: 7.2.7-uds.0
+    ref: 8.0.1-uds.0
     # x-release-please-end
     overrides:
       valkey:
