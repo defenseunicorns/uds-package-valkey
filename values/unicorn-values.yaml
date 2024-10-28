@@ -4,7 +4,7 @@
 image:
   registry: cgr.dev
   repository: du-uds-defenseunicorns/valkey
-  tag: 7.2.6
+  tag: 8.0.1
 
 metrics:
   image:
