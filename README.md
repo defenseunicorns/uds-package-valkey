@@ -10,6 +10,8 @@
 
 This package is designed for use as part of a [UDS Software Factory](https://github.com/defenseunicorns/uds-software-factory) bundle deployed on [UDS Core](https://github.com/defenseunicorns/uds-core).
 
+> Valkey is a high-performance, in-memory data store that offers a flexible and scalable solution for caching, message queuing, and primary database needs. It supports a wide range of data structures and can be deployed as a standalone daemon or in a cluster for high availability.
+
 ## Prerequisites
 
 This package requires a Kubernetes Cluster providing a Storage Class that has [UDS Core](https://github.com/defenseunicorns/uds-core) installed into it.  You can learn more about configuring this package in the [configuration documentation](./docs/configuration.md)
