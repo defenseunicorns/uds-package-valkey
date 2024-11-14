@@ -16,6 +16,7 @@ spec:
     
   network:
     allow:
+      # TODO: tighten these down
       - direction: Ingress
         remoteGenerated: IntraNamespace
       - direction: Egress

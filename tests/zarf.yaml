@@ -22,13 +22,13 @@ components:
     actions:
       onDeploy:
         after:
-          - cmd: ./zarf tools kubectl get secret -n valkey-cli valkey --template='{{ index .data "valkey-password" }}' | base64 -d
+          - cmd: zarf tools kubectl get secret -n valkey-cli valkey --template='{{ index .data "valkey-password" }}' | base64 -d
             mute: true
             setVariables:
               - name: VALKEY_PASSWORD
                 sensitive: true
           - cmd: |
-              ./zarf tools kubectl exec -n valkey-cli valkey-cli -c valkey-cli -- \
+              zarf tools kubectl exec -n valkey-cli valkey-cli -c valkey-cli -- \
                 sh -c "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey-master.valkey.svc.cluster.local -a ${ZARF_VAR_VALKEY_PASSWORD}"
             setVariables:
               - name: VALKEY_OUTPUT

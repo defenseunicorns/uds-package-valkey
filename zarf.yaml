@@ -24,6 +24,7 @@ components:
     images:
       - bitnami/valkey:8.0.1-debian-12-r2
       - docker.io/bitnami/redis-exporter:1.65.0-debian-12-r2
+      - docker.io/bitnami/valkey-sentinel:8.0.1-debian-12-r1
 
   - name: valkey
     required: true
@@ -38,3 +39,4 @@ components:
     images:
       - cgr.dev/du-uds-defenseunicorns/valkey:8.0.1
       - cgr.dev/du-uds-defenseunicorns/prometheus-redis-exporter-bitnami:1.65.0
+      - cgr.dev/du-uds-defenseunicorns/valkey-sentinel:8.0.1

@@ -10,6 +10,7 @@ metadata:
   # x-release-please-end
 
 packages:
+  # TODO: enable test of valkey w and w/o sentinel, here we are with
   - name: valkey
     path: ../
     # x-release-please-start-version
@@ -18,6 +19,59 @@ packages:
     overrides:
       valkey:
         uds-valkey-config:
+          namespace: valkey-replicated-w-sentinel
+          values:
+            - path: custom  # TODO: I don't think we need these and the ones in the test package - allowing from one end is enough
+              value:
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: valkey-cli
+                  remoteSelector:
+                    app: valkey-cli
+                  port: 6379 
+                  description: "Ingress from Valkey CLI (for tests)"
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: valkey-cli
+                  remoteSelector:
+                    app: valkey-cli
+                  port: 26379
+                  description: "Ingress from Valkey CLI (for tests) sentinel"
+            - path: copyPassword
+              value:
+                enabled: true
+                namespace: valkey-cli
+                secretName: valkey-replicated-w-sentinel
+                secretKey: valkey-password
+        valkey:
+          namespace: valkey-replicated-w-sentinel
+          values:
+            - path: architecture
+              value: replication
+            - path: sentinel.enabled  # https://github.com/bitnami/charts/blob/main/bitnami/valkey/values.yaml#L1143
+              value: true
+          variables:
+            - name: VALKEY_RESOURCES
+              path: "master.resources"
+              default:
+                limits:
+                  cpu: 100m
+                  memory: 300Mi
+                requests:
+                  cpu: 100m
+                  memory: 300Mi
+
+  - name: valkey
+    path: ../
+    # x-release-please-start-version
+    ref: 8.0.1-uds.0
+    # x-release-please-end
+    overrides:
+      valkey:
+        uds-valkey-config:
+          namespace: valkey-standalone
           values:
             - path: custom
               value:
@@ -27,15 +81,16 @@ packages:
                   remoteNamespace: valkey-cli
                   remoteSelector:
                     app: valkey-cli
-                  port: 6379
+                  # port: 6379  # disabled b/c may need to allow both ports (sentinel & read replica)
                   description: "Ingress from Valkey CLI (for tests)"
             - path: copyPassword
               value:
                 enabled: true
                 namespace: valkey-cli
-                secretName: valkey
+                secretName: valkey-standalone
                 secretKey: valkey-password
         valkey:
+          namespace: valkey-standalone
           variables:
             - name: VALKEY_RESOURCES
               path: "master.resources"

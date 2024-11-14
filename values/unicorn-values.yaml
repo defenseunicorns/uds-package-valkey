@@ -6,6 +6,12 @@ image:
   repository: du-uds-defenseunicorns/valkey
   tag: 8.0.1
 
+sentinel:
+  image:
+    registry: cgr.dev
+    repository: du-uds-defenseunicorns/valkey-sentinel
+    tag: 8.0.1
+
 metrics:
   image:
     registry: cgr.dev
