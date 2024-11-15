@@ -1,26 +1,83 @@
-apiVersion: v1
-kind: Pod
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: valkey-test-standalone
+  labels:
+    app: valkey-test
+spec:
+  template:
+    metadata:
+      labels:
+        app: valkey-test
+    spec:
+      containers:
+      - name: valkey-test
+        image: docker.io/bitnami/valkey:8.0.1-debian-12-r2
+        envFrom:
+          - secretRef:
+              name: valkey-standalone
+              optional: false
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+        command: ["/bin/sh", "-c"]
+        args: 
+         - |
+           OUTPUT="$(echo 'ping\nset TEST_name bar\nget TEST_name' | valkey-cli -h valkey-master.valkey-standalone.svc.cluster.local)";
+           echo output: "${OUTPUT}";
+           
+           echo "${OUTPUT}" | grep PONG || { echo "PONG not found - attempt to ping valkey failed"; exit 1; }
+           echo "${OUTPUT}" | grep OK || { echo "OK not found - attempt to set data didn't return success code"; exit 1; }
+           echo "${OUTPUT}" | grep bar || { echo "bar not found - didn't set data successfully "; exit 1; }
+           
+           echo "All checks passed.";
+        resources: {}
+      restartPolicy: Never
+  backoffLimit: 0
+status: {}
+---
+apiVersion: batch/v1
+kind: Job
 metadata:
   creationTimestamp: null
-  name: valkey-test
+  name: valkey-test-replicated-w-sentinel
+  labels:
+    app: valkey-test
 spec:
-  containers:
-  - name: valkey-test
-    image: docker.io/bitnami/valkey:8.0.1-debian-12-r2
-    # envFrom:
-    #   - secretRef:
-    #       name: valkey-standalone
-    #       optional: false
-    command: ["/bin/sh"]
-    args: ["-c", "while true; do echo hello; sleep 10;done"]
-    # command: ["/bin/sh"]
-    # args: ["-c", "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey-master.valkey-standalone.svc.cluster.local"]
-    resources: {}
-  #   volumeMounts:
-  #     - name: valkey-credentials-standalone
-  #       mountPath: /run/secrets/valkey-credentials-standalone
-  # volumes:
-  #   - name: valkey-credentials-standalone
-  #     secret: 
-  #       secretName: valkey-standalone  # This will need to vary per cluster type being validated
+  completions: 10  # I need to know I didn't accidentally hit the write pod.
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        app: valkey-test
+    spec:
+      containers:
+      - name: valkey-test
+        image: docker.io/bitnami/valkey:8.0.1-debian-12-r2
+        envFrom:
+          - secretRef:
+              name: valkey-replicated-w-sentinel
+              optional: false
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+        command: ["/bin/sh", "-c"]
+        args: 
+         - |
+           OUTPUT="$(echo "ping\\nset TEST_name "${POD_NAME}"\\nget TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)";
+           echo output: "${OUTPUT}";
+           
+           echo "${OUTPUT}" | grep PONG || { echo "PONG not found - attempt to ping valkey failed"; exit 1; }
+           echo "${OUTPUT}" | grep OK || { echo "OK not found - attempt to set data didn't return success code"; exit 1; }
+           echo "${OUTPUT}" | grep "${POD_NAME}" || { echo "Data just set not found on read attempt - didn't set data successfully "; exit 1; }
+           
+           echo "All checks passed.";
+        resources: {}
+      restartPolicy: Never
+  backoffLimit: 0
 status: {}

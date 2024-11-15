@@ -10,6 +10,44 @@ metadata:
   # x-release-please-end
 
 packages:
+  - name: valkey
+    path: ../
+    # x-release-please-start-version
+    ref: 8.0.1-uds.0
+    # x-release-please-end
+    overrides:
+      valkey:
+        uds-valkey-config:
+          namespace: valkey-standalone
+          values:
+            - path: custom
+              value:
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: valkey-test
+                  remoteSelector:
+                    app: valkey-test
+                  port: 6379  # disabled b/c may need to allow both ports (sentinel & read replica)
+                  description: "Ingress from Valkey CLI (for tests)"
+            - path: copyPassword
+              value:
+                enabled: true
+                namespace: valkey-test
+                secretName: valkey-standalone
+                secretKey: REDISCLI_AUTH
+        valkey:
+          namespace: valkey-standalone
+          variables:
+            - name: VALKEY_RESOURCES
+              path: "master.resources"
+              default:
+                limits:
+                  cpu: 100m
+                  memory: 300Mi
+                requests:
+                  cpu: 100m
+                  memory: 300Mi
   # TODO: enable test of valkey w and w/o sentinel, here we are with
   - name: valkey
     path: ../
@@ -44,7 +82,7 @@ packages:
                 enabled: true
                 namespace: valkey-test
                 secretName: valkey-replicated-w-sentinel
-                secretKey: VALKEY_PASSWORD
+                secretKey: REDISCLI_AUTH
         valkey:
           namespace: valkey-replicated-w-sentinel
           values:
@@ -52,45 +90,6 @@ packages:
               value: replication
             - path: sentinel.enabled  # https://github.com/bitnami/charts/blob/main/bitnami/valkey/values.yaml#L1143
               value: true
-          variables:
-            - name: VALKEY_RESOURCES
-              path: "master.resources"
-              default:
-                limits:
-                  cpu: 100m
-                  memory: 300Mi
-                requests:
-                  cpu: 100m
-                  memory: 300Mi
-
-  - name: valkey
-    path: ../
-    # x-release-please-start-version
-    ref: 8.0.1-uds.0
-    # x-release-please-end
-    overrides:
-      valkey:
-        uds-valkey-config:
-          namespace: valkey-standalone
-          values:
-            - path: custom
-              value:
-                - direction: Ingress
-                  selector:
-                    app.kubernetes.io/name: valkey
-                  remoteNamespace: valkey-test
-                  remoteSelector:
-                    app: valkey-test
-                  # port: 6379  # disabled b/c may need to allow both ports (sentinel & read replica)
-                  description: "Ingress from Valkey CLI (for tests)"
-            - path: copyPassword
-              value:
-                enabled: true
-                namespace: valkey-test
-                secretName: valkey-standalone
-                secretKey: VALKEY_PASSWORD
-        valkey:
-          namespace: valkey-standalone
           variables:
             - name: VALKEY_RESOURCES
               path: "master.resources"

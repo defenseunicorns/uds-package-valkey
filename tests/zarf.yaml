@@ -9,10 +9,55 @@ metadata:
   version: 0.1.0
 
 components:
-  - name: test-valkey-standalone-connectivity
+  # - name: test-valkey-standalone
+  #   required: true
+  #   manifests:
+  #     - name: valkey-test-standalone
+  #       namespace: valkey-test
+  #       files:
+  #         - valkey/uds-package.yaml
+  #         - valkey/test-job.yaml
+  #   images:
+  #     - docker.io/bitnami/valkey:8.0.1-debian-12-r2
+  #   actions:
+  #     onDeploy:
+  #       before:
+  #         - description: Wait for Valkey-standalone to be healthy
+  #           maxTotalSeconds: 300
+  #           wait:
+  #             cluster:
+  #               kind: packages.uds.dev
+  #               name: valkey
+  #               condition: "'{.status.phase}'=Ready"
+  #               namespace: valkey-standalone
+  #         - description: Wait for Valkey-standalone to be ready
+  #           maxTotalSeconds: 90
+  #           wait:
+  #             cluster:
+  #               kind: pod
+  #               name: app.kubernetes.io/name=valkey
+  #               condition: Ready
+  #               namespace: valkey-standalone
+  #       after:
+  #         - cmd: zarf tools kubectl get secret -n valkey-test valkey-standalone --template='{{ index .data "VALKEY_PASSWORD" }}' | base64 -d
+  #           mute: true
+  #           setVariables:
+  #             - name: VALKEY_PASSWORD
+  #               sensitive: true
+  #         - cmd: |
+  #             zarf tools kubectl exec -n valkey-test valkey-test -c valkey-test -- \
+  #               sh -c "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey-master.valkey-standalone.svc.cluster.local -a ${ZARF_VAR_VALKEY_PASSWORD}"
+  #           setVariables:
+  #             - name: VALKEY_OUTPUT
+  #         - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT}
+  #         - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep PONG
+  #         - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep OK
+  #         - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep bar
+
+  - name: test-valkey-replicated-w-sentinel
     required: true
     manifests:
-      - name: valkey-test-standalone
+      - name: valkey-test-replicated-w-sentinel
         namespace: valkey-test
         files:
           - valkey/uds-package.yaml
@@ -22,34 +67,37 @@ components:
     actions:
       onDeploy:
         before:
-          - description: Wait for Valkey-standalone to be healthy
+          - description: Wait for Valkey-replicated to be healthy
             maxTotalSeconds: 300
             wait:
               cluster:
                 kind: packages.uds.dev
                 name: valkey
                 condition: "'{.status.phase}'=Ready"
-                namespace: valkey-standalone
-          - description: Wait for Valkey-standalone to be ready
+                namespace: valkey-replicated-w-sentinel
+          - description: Wait for Valkey-replicated to be ready
             maxTotalSeconds: 90
             wait:
               cluster:
                 kind: pod
                 name: app.kubernetes.io/name=valkey
                 condition: Ready
-                namespace: valkey-standalone
+                namespace: valkey-replicated-w-sentinel
         after:
-          - cmd: zarf tools kubectl get secret -n valkey-test valkey-standalone --template='{{ index .data "VALKEY_PASSWORD" }}' | base64 -d
+          - cmd: zarf tools kubectl get secret -n valkey-test valkey-replicated-w-sentinel --template='{{ index .data "VALKEY_PASSWORD" }}' | base64 -d
             mute: true
             setVariables:
               - name: VALKEY_PASSWORD
                 sensitive: true
           - cmd: |
               zarf tools kubectl exec -n valkey-test valkey-test -c valkey-test -- \
-                sh -c "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey-master.valkey-standalone.svc.cluster.local -a ${ZARF_VAR_VALKEY_PASSWORD}"
+                sh -c "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local -a ${ZARF_VAR_VALKEY_PASSWORD}"
             setVariables:
               - name: VALKEY_OUTPUT
+          - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT}
           - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep PONG
           - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep OK
           - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep bar
-        
+
+        # VALKEY_PASSWORD=$(kubectl get secret -n valkey-test valkey-standalone -o json | jq .data.VALKEY_PASSWORD | tr -d '"' | base64 -d)
+        # kubectl exec -n valkey-test valkey-test -c valkey-test -- sh -c "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey-master.valkey-standalone.svc.cluster.local -a ${VALKEY_PASSWORD}"
