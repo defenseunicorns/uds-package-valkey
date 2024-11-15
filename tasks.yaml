@@ -32,62 +32,17 @@ tasks:
   - name: create-deploy-test-bundle
     description: Test and validate cluster is deployed with Valkey
     actions:
+      - task: create-dev-package
       - task: create:test-bundle
       - task: deploy:test-bundle
-      - task: setup:create-doug-user
-      - task: test:all
-
-  - name: create-dev-bundle-amd64
-    description: Create dev/test bundle for testing in an amd64 cluster with uds-core already installed
-    actions:
-      - task: create:package
-        with:
-          architecture: amd64
-      - task: create:test-bundle
-        with:
-          architecture: amd64
-
-  - name: deploy-dev-bundle-amd64
-    description: Deploy dev/test bundle for testing in an amd64 cluster with uds-core already installed
-    inputs:
-      path:
-        description: Path relative to the repositories root where the uds-bundle.yaml and .tar.zst lives
-        default: bundle
-      config:
-        description: Path to the bundle config file. Defaults to bundle/uds-config.yaml.
-        default: bundle/uds-config.yaml
-      options:
-        description: For setting deploy time variables and flags
-    actions:
-      - description: Get the current UDS Bundle name
-        cmd: cat ${{ .inputs.path }}/uds-bundle.yaml | uds zarf tools yq .metadata.name
-        setVariables:
-          - name: BUNDLE_NAME
-      - description: Get the current UDS Bundle version
-        cmd: cat ${{ .inputs.path }}/uds-bundle.yaml | uds zarf tools yq .metadata.version
-        setVariables:
-          - name: BUNDLE_VERSION
-      - description: Deploy the UDS bundle with the package and its dependencies
-        env:
-          - UDS_CONFIG=${{ .inputs.config }}
-        cmd: uds deploy "${{ .inputs.path }}/uds-bundle-${BUNDLE_NAME}-${UDS_ARCH}-${BUNDLE_VERSION}.tar.zst" --confirm --no-progress ${{ .inputs.options }}
-
-  - name: create-deploy-test-bundle-amd64
-    description: Test and validate cluster is deployed with Valkey
-    actions:
-      - task: create:test-bundle
-      with:
-        architecture: amd64
-      - task: deploy:test-bundle
-        with:
-          architecture: amd64
       # - task: setup:create-doug-user
-      #   with:
-      #     architecture: amd64
       - task: test:all
-        with:
-          architecture: amd64
       - task: compliance:validate
+
+  - name: test-bundle
+    description: Test the deployed test bundle vai the test package
+    actions:
+      - task: test:all
 
   - name: dev
     description: Create and deploy the bundle against an existing cluster

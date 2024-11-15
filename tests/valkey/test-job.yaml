@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  name: valkey-test
+spec:
+  containers:
+  - name: valkey-test
+    image: docker.io/bitnami/valkey:8.0.1-debian-12-r2
+    # envFrom:
+    #   - secretRef:
+    #       name: valkey-standalone
+    #       optional: false
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do echo hello; sleep 10;done"]
+    # command: ["/bin/sh"]
+    # args: ["-c", "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey-master.valkey-standalone.svc.cluster.local"]
+    resources: {}
+  #   volumeMounts:
+  #     - name: valkey-credentials-standalone
+  #       mountPath: /run/secrets/valkey-credentials-standalone
+  # volumes:
+  #   - name: valkey-credentials-standalone
+  #     secret: 
+  #       secretName: valkey-standalone  # This will need to vary per cluster type being validated
+status: {}

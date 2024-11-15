@@ -26,25 +26,25 @@ packages:
                 - direction: Ingress
                   selector:
                     app.kubernetes.io/name: valkey
-                  remoteNamespace: valkey-cli
+                  remoteNamespace: valkey-test
                   remoteSelector:
-                    app: valkey-cli
+                    app: valkey-test
                   port: 6379 
                   description: "Ingress from Valkey CLI (for tests)"
                 - direction: Ingress
                   selector:
                     app.kubernetes.io/name: valkey
-                  remoteNamespace: valkey-cli
+                  remoteNamespace: valkey-test
                   remoteSelector:
-                    app: valkey-cli
+                    app: valkey-test
                   port: 26379
                   description: "Ingress from Valkey CLI (for tests) sentinel"
             - path: copyPassword
               value:
                 enabled: true
-                namespace: valkey-cli
+                namespace: valkey-test
                 secretName: valkey-replicated-w-sentinel
-                secretKey: valkey-password
+                secretKey: VALKEY_PASSWORD
         valkey:
           namespace: valkey-replicated-w-sentinel
           values:
@@ -78,17 +78,17 @@ packages:
                 - direction: Ingress
                   selector:
                     app.kubernetes.io/name: valkey
-                  remoteNamespace: valkey-cli
+                  remoteNamespace: valkey-test
                   remoteSelector:
-                    app: valkey-cli
+                    app: valkey-test
                   # port: 6379  # disabled b/c may need to allow both ports (sentinel & read replica)
                   description: "Ingress from Valkey CLI (for tests)"
             - path: copyPassword
               value:
                 enabled: true
-                namespace: valkey-cli
+                namespace: valkey-test
                 secretName: valkey-standalone
-                secretKey: valkey-password
+                secretKey: VALKEY_PASSWORD
         valkey:
           namespace: valkey-standalone
           variables:
