@@ -1,5 +1,6 @@
 ---
-# This removes the NR filter_not_found error that you get when you try to access the primary node from the speaking node
+# This removes the NR filter_not_found error that you get when you try to access
+# the primary node.
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
