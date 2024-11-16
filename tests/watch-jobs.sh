@@ -18,6 +18,7 @@ is_job_complete() {
 }
 
 # Watch loop
+# shellcheck disable=SC2128
 while [ -n "$JOBS" ]; do
   UPDATED_JOBS=""
 
