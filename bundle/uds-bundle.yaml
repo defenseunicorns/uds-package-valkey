@@ -35,7 +35,7 @@ packages:
                 enabled: true
                 namespace: valkey-test
                 secretName: valkey-standalone
-                secretKey: REDISCLI_AUTH
+                secretKey: REDISCLI_AUTH  # This allows us to mount it in as an env var and the valkey-cli picks it right up
         valkey:
           namespace: valkey-standalone
           variables:
@@ -48,7 +48,6 @@ packages:
                 requests:
                   cpu: 100m
                   memory: 300Mi
-  # TODO: enable test of valkey w and w/o sentinel, here we are with
   - name: valkey
     path: ../
     # x-release-please-start-version
@@ -59,7 +58,7 @@ packages:
         uds-valkey-config:
           namespace: valkey-replicated-w-sentinel
           values:
-            - path: custom  # TODO: I don't think we need these and the ones in the test package - allowing from one end is enough
+            - path: custom
               value:
                 - direction: Ingress
                   selector:

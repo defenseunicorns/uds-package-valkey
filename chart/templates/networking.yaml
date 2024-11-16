@@ -12,9 +12,6 @@ spec:
   - number: 6379
     name: redis
     protocol: TCP
-  - number: 26379  # TODO: attempt without this - see if it works
-    name: sentinel
-    protocol: TCP
   location: MESH_INTERNAL
   resolution: NONE
 ---
@@ -29,8 +26,6 @@ spec:
     mode: STRICT
   portLevelMtls:
     6379:
-      mode: PERMISSIVE
-    26379:  # TODO: this may not be needed - check the valkey pod logs to know if we're having problems w/o it
       mode: PERMISSIVE
   selector:
     matchLabels:

@@ -8,32 +8,32 @@ metadata:
 spec:
   network:
     allow:
+      # - direction: Egress
+      #   selector:
+      #     app: valkey-test
+      #   remoteGenerated: Anywhere  # Parameterize this to be the actual namespace being tested
+        # TODO: add in ports
       - direction: Egress
         selector:
-          app: valkey-test
-        remoteGenerated: Anywhere  # Parameterize this to be the actual namespace being tested
-        # TODO: add in ports
-      # - direction: Egress
-      #   selector:
-      #     purpose: test-valkey
-      #   remoteNamespace: valkey-standalone
-      #   remoteSelector:
-      #     app.kubernetes.io/name: valkey
-      #   port: 6379
-      #   description: "Egress from Valkey CLI (for tests of standalone instance)"
-      # - direction: Egress
-      #   selector:
-      #     purpose: test-valkey
-      #   remoteNamespace: valkey-replicated-w-sentinel
-      #   remoteSelector:
-      #     app.kubernetes.io/name: valkey
-      #   port: 6379
-      #   description: "Egress from Valkey CLI (for tests of replicated w/ sentinel) to read-port"
-      # - direction: Egress
-      #   selector:
-      #     purpose: test-valkey
-      #   remoteNamespace: valkey-replicated-w-sentinel
-      #   remoteSelector:
-      #     app.kubernetes.io/name: valkey
-      #   port: 26379
-      #   description: "Egress from Valkey CLI (for tests of replicated w/ sentinel) to sentinel-port"
+          purpose: test-valkey
+        remoteNamespace: valkey-standalone
+        remoteSelector:
+          app.kubernetes.io/name: valkey
+        port: 6379
+        description: "Egress from Valkey CLI (for tests of standalone instance)"
+      - direction: Egress
+        selector:
+          purpose: test-valkey
+        remoteNamespace: valkey-replicated-w-sentinel
+        remoteSelector:
+          app.kubernetes.io/name: valkey
+        port: 6379
+        description: "Egress from Valkey CLI (for tests of replicated w/ sentinel) to read-port"
+      - direction: Egress
+        selector:
+          purpose: test-valkey
+        remoteNamespace: valkey-replicated-w-sentinel
+        remoteSelector:
+          app.kubernetes.io/name: valkey
+        port: 26379
+        description: "Egress from Valkey CLI (for tests of replicated w/ sentinel) to sentinel-port"
