@@ -1,4 +1,6 @@
----
+# Copyright 2024 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
 # This removes the NR filter_not_found error that you get when you try to access
 # the primary node.
 apiVersion: networking.istio.io/v1beta1
