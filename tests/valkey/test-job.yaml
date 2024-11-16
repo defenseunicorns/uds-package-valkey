@@ -69,9 +69,18 @@ spec:
         command: ["/bin/sh", "-c"]
         args: 
          - |
-           OUTPUT="$(echo "ping\\nset TEST_name "${POD_NAME}"\\nget TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)";
-           echo output: "${OUTPUT}";
-           
+           # Ask the Sentinel which node is the primary node
+           PRIMARY_ADDR="$(echo 'SENTINEL GET-PRIMARY-ADDR-BY-NAME mymaster' | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local -p 26379)"
+           echo "Primary ADDR is: ${PRIMARY_ADDR}"
+           # Extract HOST and PORT using awk
+           HOST=$(echo "${PRIMARY_ADDR}" | sed -n '1p')
+           PORT=$(echo "${PRIMARY_ADDR}" | sed -n '2p')
+           echo "Primary is ${HOST}:${PORT}"
+
+           # Attempt to set and get a test value that's always different
+           OUTPUT="$(echo "ping\\nset TEST_name "${POD_NAME}"\\nget TEST_name" | valkey-cli -h ${HOST} -p ${PORT})";
+
+           # Verify the set/get worked
            echo "${OUTPUT}" | grep PONG || { echo "PONG not found - attempt to ping valkey failed"; exit 1; }
            echo "${OUTPUT}" | grep OK || { echo "OK not found - attempt to set data didn't return success code"; exit 1; }
            echo "${OUTPUT}" | grep "${POD_NAME}" || { echo "Data just set not found on read attempt - didn't set data successfully "; exit 1; }

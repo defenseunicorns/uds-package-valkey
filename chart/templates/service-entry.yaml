@@ -1,0 +1,37 @@
+---
+# This removes the NR filter_not_found error that you get when you try to access the primary node from the speaking node
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: valkey-headless-entry
+  namespace:  {{ .Release.Namespace }}
+spec:
+  hosts:
+  - "*.valkey-headless.{{ .Release.Namespace }}.svc.cluster.local" # Matches pod-specific DNS names
+  ports:
+  - number: 6379
+    name: redis
+    protocol: TCP
+  - number: 26379  # TODO: attempt without this - see if it works
+    name: sentinel
+    protocol: TCP
+  location: MESH_INTERNAL
+  resolution: NONE
+---
+# This should enable comms that are IP based: https://github.com/istio/istio/issues/37423
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: valkey-clustering-exception
+  namespace: {{ .Release.Namespace }}
+spec:
+  mtls:
+    mode: STRICT
+  portLevelMtls:
+    6379:
+      mode: PERMISSIVE
+    26379:  # TODO: this may not be needed - check the valkey pod logs to know if we're having problems w/o it
+      mode: PERMISSIVE
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: valkey
