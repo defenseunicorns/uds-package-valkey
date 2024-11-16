@@ -8,14 +8,9 @@ metadata:
 spec:
   network:
     allow:
-      # - direction: Egress
-      #   selector:
-      #     app: valkey-test
-      #   remoteGenerated: Anywhere  # Parameterize this to be the actual namespace being tested
-        # TODO: add in ports
       - direction: Egress
         selector:
-          purpose: test-valkey
+          app: valkey-test
         remoteNamespace: valkey-standalone
         remoteSelector:
           app.kubernetes.io/name: valkey
@@ -23,7 +18,7 @@ spec:
         description: "Egress from Valkey CLI (for tests of standalone instance)"
       - direction: Egress
         selector:
-          purpose: test-valkey
+          app: valkey-test
         remoteNamespace: valkey-replicated-w-sentinel
         remoteSelector:
           app.kubernetes.io/name: valkey
@@ -31,7 +26,7 @@ spec:
         description: "Egress from Valkey CLI (for tests of replicated w/ sentinel) to read-port"
       - direction: Egress
         selector:
-          purpose: test-valkey
+          app: valkey-test
         remoteNamespace: valkey-replicated-w-sentinel
         remoteSelector:
           app.kubernetes.io/name: valkey

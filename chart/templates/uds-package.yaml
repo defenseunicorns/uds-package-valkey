@@ -13,13 +13,9 @@ spec:
       targetPort: 9121
       portName: http-metrics
       description: Metrics
-    
   network:
     allow:
-      # TODO: tighten these down
       - direction: Ingress
-        remoteGenerated: IntraNamespace
-      - direction: Egress
         remoteGenerated: IntraNamespace
 
       # Custom rules to allow clients to connect

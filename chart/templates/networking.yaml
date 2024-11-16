@@ -16,6 +16,7 @@ spec:
   resolution: NONE
 ---
 # This should enable comms that are IP based: https://github.com/istio/istio/issues/37423
+# as are used by the replicas when they sync.
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:

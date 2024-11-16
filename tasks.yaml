@@ -36,7 +36,6 @@ tasks:
       - task: create:test-bundle
       - task: deploy:test-bundle
       - task: test:all
-      # - task: compliance:validate
 
   - name: test-bundle
     description: Test the deployed test bundle vai the test package

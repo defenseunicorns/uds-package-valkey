@@ -28,7 +28,7 @@ packages:
                   remoteNamespace: valkey-test
                   remoteSelector:
                     app: valkey-test
-                  port: 6379  # disabled b/c may need to allow both ports (sentinel & read replica)
+                  port: 6379
                   description: "Ingress from Valkey CLI (for tests)"
             - path: copyPassword
               value:
