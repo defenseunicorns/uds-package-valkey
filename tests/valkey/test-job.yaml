@@ -26,14 +26,23 @@ spec:
         command: ["/bin/sh", "-c"]
         args: 
          - |
-           OUTPUT="$(echo 'ping\nset TEST_name bar\nget TEST_name' | valkey-cli -h valkey-master.valkey-standalone.svc.cluster.local)";
-           echo output: "${OUTPUT}";
-           
-           echo "${OUTPUT}" | grep PONG || { echo "PONG not found - attempt to ping valkey failed"; exit 1; }
-           echo "${OUTPUT}" | grep OK || { echo "OK not found - attempt to set data didn't return success code"; exit 1; }
-           echo "${OUTPUT}" | grep bar || { echo "bar not found - didn't set data successfully "; exit 1; }
-           
-           echo "All checks passed.";
+          # Set the standalone Valkey host and port
+          HOST="valkey-master.valkey-standalone.svc.cluster.local"
+          PORT="6379"
+
+          # Check if the Valkey server responds to PING
+          PING_OUTPUT=$(echo "ping" | valkey-cli -h ${HOST} -p ${PORT})
+          echo "${PING_OUTPUT}" | grep PONG && echo "Valkey server ponged back" || { echo "Failed to contact Valkey. Output was: ${PING_OUTPUT}"; exit 1; }
+
+          # Try to set a key-value pair
+          SET_OUTPUT=$(echo "set TEST_name ${POD_NAME}" | valkey-cli -h ${HOST} -p ${PORT})
+          echo "${SET_OUTPUT}" | grep OK && echo "Set value via Valkey" || { echo "Failed to set value via Valkey. Output was: ${SET_OUTPUT}"; exit 1; }
+
+          # Try to get the value for the key
+          GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h ${HOST} -p ${PORT})
+          echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Retrieved value via Valkey" || { echo "Failed to retrieve value via Valkey. Output was: ${GET_OUTPUT}"; exit 1; }
+
+          echo "All checks passed."
         resources: {}
       restartPolicy: Never
   backoffLimit: 0
@@ -69,23 +78,37 @@ spec:
         command: ["/bin/sh", "-c"]
         args: 
          - |
-           # Ask the Sentinel which node is the primary node
-           PRIMARY_ADDR="$(echo 'SENTINEL GET-PRIMARY-ADDR-BY-NAME mymaster' | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local -p 26379)"
-           echo "Primary ADDR is: ${PRIMARY_ADDR}"
-           # Extract HOST and PORT using awk
-           HOST=$(echo "${PRIMARY_ADDR}" | sed -n '1p')
-           PORT=$(echo "${PRIMARY_ADDR}" | sed -n '2p')
-           echo "Primary is ${HOST}:${PORT}"
+          # Ask the Sentinel which node is the primary node
+          PRIMARY_ADDR="$(echo 'SENTINEL GET-PRIMARY-ADDR-BY-NAME mymaster' | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local -p 26379)"
+          echo "Primary ADDR is: ${PRIMARY_ADDR}"
 
-           # Attempt to set and get a test value that's always different
-           OUTPUT="$(echo "ping\\nset TEST_name "${POD_NAME}"\\nget TEST_name" | valkey-cli -h ${HOST} -p ${PORT})";
+          # Extract HOST and PORT using sed
+          HOST=$(echo "${PRIMARY_ADDR}" | sed -n '1p')
+          PORT=$(echo "${PRIMARY_ADDR}" | sed -n '2p')
+          echo "Primary is ${HOST}:${PORT}"
 
-           # Verify the set/get worked
-           echo "${OUTPUT}" | grep PONG || { echo "PONG not found - attempt to ping valkey failed"; exit 1; }
-           echo "${OUTPUT}" | grep OK || { echo "OK not found - attempt to set data didn't return success code"; exit 1; }
-           echo "${OUTPUT}" | grep "${POD_NAME}" || { echo "Data just set not found on read attempt - didn't set data successfully "; exit 1; }
-           
-           echo "All checks passed.";
+          # Check if primary responds to PING
+          PING_OUTPUT=$(echo "ping" | valkey-cli -h ${HOST} -p ${PORT})
+          echo "${PING_OUTPUT}" | grep PONG && echo "Primary ponged back" || { echo "Failed to contact primary. Output was: ${PING_OUTPUT}"; exit 1; }
+
+          # Try to set a value on the primary
+          SET_OUTPUT=$(echo "set TEST_name ${POD_NAME}" | valkey-cli -h ${HOST} -p ${PORT})
+          echo "${SET_OUTPUT}" | grep OK && echo "Set value via primary" || { echo "Failed to set value via primary. Output was: ${SET_OUTPUT}"; exit 1; }
+
+          # Ensure replicas return the value
+          GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
+          echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
+
+          GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
+          echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
+
+          GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
+          echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
+
+          GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
+          echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
+
+          echo "All checks passed."
         resources: {}
       restartPolicy: Never
   backoffLimit: 0
