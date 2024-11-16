@@ -7,10 +7,10 @@ image:
   tag: 8.0.1
 
 sentinel:
-  image:
-    registry: cgr.dev
-    repository: du-uds-defenseunicorns/valkey-sentinel
-    tag: 8.0.1
+  image:  # Unicorn flavor option DNE
+    registry: docker.io
+    repository: bitnami/valkey-sentinel
+    tag: 8.0.1-debian-12-r1
 
 metrics:
   image:
