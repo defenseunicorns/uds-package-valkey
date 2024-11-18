@@ -58,4 +58,7 @@ components:
             cmd: uds zarf tools kubectl delete -f tests/valkey/test-job.yaml || true
         after:
           - description: Watch test jobs and report their conditions
-            cmd: /bin/sh tests/watch-jobs.sh
+            cmd: ./tests/watch-jobs.sh
+            shell:
+              linux: bash
+              darwin: bash
