@@ -10,6 +10,10 @@ metadata:
   # x-release-please-end
 
 packages:
+  - name: valkey-test-ns
+    path: ../
+    ref: 0.1.0
+
   - name: valkey
     path: ../
     # x-release-please-start-version

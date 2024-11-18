@@ -1,6 +1,6 @@
+---
 # Copyright 2024 Defense Unicorns
 # SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
-
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -50,6 +50,8 @@ spec:
   backoffLimit: 0
 status: {}
 ---
+# Copyright 2024 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -58,7 +60,7 @@ metadata:
   labels:
     app: valkey-test
 spec:
-  completions: 10 # I need to know I didn't accidentally hit the write pod.
+  completions: 10  # I need to know I didn't accidentally hit the write pod.
   parallelism: 1
   template:
     metadata:

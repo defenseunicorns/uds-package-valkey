@@ -28,6 +28,15 @@ tasks:
       - task: create:package
         with:
           options: "--skip-sbom"
+      - task: create:package
+        with:
+          options: "--skip-sbom"
+          path: "src/"
+
+  - name: test-bundle
+    description: Test the deployed test bundle via the test package
+    actions:
+      - task: test:all
 
   - name: create-deploy-test-bundle
     description: Test and validate cluster is deployed with Valkey
@@ -35,12 +44,7 @@ tasks:
       - task: create-dev-package
       - task: create:test-bundle
       - task: deploy:test-bundle
-      - task: test:all
-
-  - name: test-bundle
-    description: Test the deployed test bundle vai the test package
-    actions:
-      - task: test:all
+      - task: test-bundle
 
   - name: dev
     description: Create and deploy the bundle against an existing cluster
@@ -54,7 +58,6 @@ tasks:
   - name: test-install
     description: Test the health of a Valkey deployment
     actions:
-      - task: create-dev-package
       - task: setup:k3d-test-cluster
       - task: create-deploy-test-bundle
       - task: compliance:validate

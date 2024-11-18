@@ -9,17 +9,18 @@ NAMESPACE="valkey-test"
 # Function to get the status of a job
 get_job_status() {
   job_name=$1
-  kubectl get job "${job_name}" -n "${NAMESPACE}" -o jsonpath='{.status.conditions[?(@.type=="Failed")].status}' 2>/dev/null
+  kubectl get job "${job_name}" -n "${NAMESPACE}" -o jsonpath='{.status.conditions[?(@.type=="Failed")].status}'
 }
 
 # Function to check if a job is complete
 is_job_complete() {
   job_name=$1
-  kubectl get job "${job_name}" -n "${NAMESPACE}" -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' 2>/dev/null
+  kubectl get job "${job_name}" -n "${NAMESPACE}" -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}'
 }
 
 # Watch loop
 while [ -n "${JOBS}" ]; do
+  sleep 5
   UPDATED_JOBS=""
 
   for job in ${JOBS}; do
@@ -42,9 +43,6 @@ while [ -n "${JOBS}" ]; do
 
   # Update the job list with unfinished jobs
   JOBS="${UPDATED_JOBS}"
-
-  # Wait before the next check
-  sleep 5
 done
 
 echo "All jobs completed successfully."
