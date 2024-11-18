@@ -17,6 +17,8 @@ spec:
     allow:
       - direction: Ingress
         remoteGenerated: IntraNamespace
+      - direction: Egress
+        remoteGenerated: IntraNamespace
 
       # Custom rules to allow clients to connect
     {{- range .Values.custom }}
