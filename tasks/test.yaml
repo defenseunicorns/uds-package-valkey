@@ -10,7 +10,7 @@ tasks:
   - name: create-test-package
     description: Create the test package to confirm Valkey is working
     actions:
-      - cmd: uds zarf package create tests --confirm --architecture="${{ .inputs.architecture }}" --skip-sbom
+      - cmd: uds zarf package create tests --confirm --skip-sbom
 
   - name: test-valkey
     actions:
