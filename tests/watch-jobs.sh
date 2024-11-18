@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 # Copyright 2024 Defense Unicorns
 # SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
 
 # List of job names to monitor
-JOBS=("valkey-test-standalone" "valkey-test-replicated-w-sentinel")
+declare -a job_array=("valkey-test-standalone" "valkey-test-replicated-w-sentinel")
 NAMESPACE="valkey-test"
 
 
@@ -21,10 +21,10 @@ is_job_complete() {
 
 # Watch loop
 # shellcheck disable=SC2128
-while [ -n "$JOBS" ]; do
+while [ -n "$job_array" ]; do
   UPDATED_JOBS=""
 
-  for job in $JOBS; do
+  for job in $job_array; do
     # Check for failed condition
     if [ "$(get_job_status "$job")" = "True" ]; then
       echo "Error: Job '$job' failed."
@@ -41,7 +41,7 @@ while [ -n "$JOBS" ]; do
   done
 
   # Update the job list with unfinished jobs
-  JOBS="$UPDATED_JOBS"
+  job_array="$UPDATED_JOBS"
 
   # Wait before the next check
   sleep 5
