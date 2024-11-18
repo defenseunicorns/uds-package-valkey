@@ -32,6 +32,7 @@ while [[ -n "${JOBS}" ]]; do
     if [[ "$(get_job_status "${job}")" = "True" ]]; then
       echo "Error: Job '${job}' failed."
       kubectl describe -n "${NAMESPACE}" jobs.batch "${job}"
+      kubectl logs -n "${NAMESPACE}" jobs.batch "${job}"
       exit 1
     fi
 
