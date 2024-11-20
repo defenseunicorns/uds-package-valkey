@@ -36,7 +36,6 @@ packages:
                 secretName: valkey-standalone
                 secretKey: REDISCLI_AUTH  # This allows us to mount it in as an env var and the valkey-cli picks it right up
         valkey:
-          namespace: valkey-standalone
           variables:
             - name: VALKEY_RESOURCES
               path: "master.resources"
