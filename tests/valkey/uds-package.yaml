@@ -11,7 +11,7 @@ spec:
       - direction: Egress
         selector:
           app: valkey-test
-        remoteNamespace: valkey-standalone
+        remoteNamespace: valkey
         remoteSelector:
           app.kubernetes.io/name: valkey
         port: 6379
