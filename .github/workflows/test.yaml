@@ -49,13 +49,6 @@ jobs:
     outputs:
       upgrade-flavors: ${{ steps.test-flavor.outputs.upgrade-flavors }}
 
-  debug:
-    runs-on: uds-swf-ubuntu-big-boy-16-core
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
   validate:
     needs: check-flavor
     strategy:
