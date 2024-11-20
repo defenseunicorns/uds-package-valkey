@@ -3,14 +3,15 @@
 
 # This removes the NR filter_not_found error that you get when you try to access
 # the primary node.
+{{- range $i := until (int .Values.replicas) }}
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
-  name: valkey-headless-entry
-  namespace:  {{ .Release.Namespace }}
+  name: valkey-headless-{{ $i }}
+  namespace: {{ $.Release.Namespace }}
 spec:
   hosts:
-  - "*.valkey-headless.{{ .Release.Namespace }}.svc.cluster.local" # Matches pod-specific DNS names
+  - valkey-node-{{ $i }}.valkey-headless.{{ $.Release.Namespace }}.svc.cluster.local # Matches pod-specific DNS names
   ports:
   - number: 6379
     name: redis
@@ -18,20 +19,16 @@ spec:
   location: MESH_INTERNAL
   resolution: NONE
 ---
-# This enables comms that are IP based: https://github.com/istio/istio/issues/37423
-# The read replicas use each-other's IPs to talk once the sentinels tell them what
-# the IPs are.
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
 metadata:
-  name: valkey-clustering-exception
-  namespace: {{ .Release.Namespace }}
+  name: valkey-headless-{{ $i }}
+  namespace: {{ $.Release.Namespace }}
 spec:
-  mtls:
-    mode: STRICT
-  portLevelMtls:
-    6379:
-      mode: PERMISSIVE
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: valkey
+  host: valkey-node-{{ $i }}.valkey-headless.{{ $.Release.Namespace }}.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+      sni: valkey-node-{{ $i }}.valkey-headless.{{ $.Release.Namespace }}.svc.cluster.local
+---
+{{- end }}
