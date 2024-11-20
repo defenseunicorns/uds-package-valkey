@@ -18,7 +18,6 @@ packages:
     overrides:
       valkey:
         uds-valkey-config:
-          namespace: valkey-standalone
           values:
             - path: custom
               value:
