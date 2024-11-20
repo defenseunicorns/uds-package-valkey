@@ -28,10 +28,6 @@ tasks:
       - task: create:package
         with:
           options: "--skip-sbom"
-      - task: create:package
-        with:
-          options: "--skip-sbom"
-          path: "src/"
 
   - name: create-deploy-test-bundle
     description: Test and validate cluster is deployed with Valkey
