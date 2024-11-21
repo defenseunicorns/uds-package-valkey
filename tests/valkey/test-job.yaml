@@ -8,6 +8,8 @@ metadata:
   labels:
     app: valkey-test
 spec:
+  completions: 10
+  parallelism: 1
   template:
     metadata:
       labels:
@@ -45,10 +47,8 @@ spec:
               echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Retrieved value via Valkey" || { echo "Failed to retrieve value via Valkey. Output was: ${GET_OUTPUT}"; exit 1; }
 
               echo "All checks passed."
-          resources: {}
-      restartPolicy: Never
-  backoffLimit: 0
-status: {}
+      restartPolicy: OnFailure
+  backoffLimit: 5
 ---
 # Copyright 2024 Defense Unicorns
 # SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
@@ -60,7 +60,7 @@ metadata:
   labels:
     app: valkey-test
 spec:
-  completions: 10  # I need to know I didn't accidentally hit the write pod.
+  completions: 10
   parallelism: 1
   template:
     metadata:
@@ -113,7 +113,5 @@ spec:
               echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
 
               echo "All checks passed."
-          resources: {}
-      restartPolicy: Never
-  backoffLimit: 0
-status: {}
+      restartPolicy: OnFailure
+  backoffLimit: 5
