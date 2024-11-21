@@ -22,38 +22,6 @@ components:
     actions:
       onDeploy:
         before:
-          - description: Wait for Valkey-standalone to be healthy
-            maxTotalSeconds: 300
-            wait:
-              cluster:
-                kind: packages.uds.dev
-                name: valkey
-                condition: "'{.status.phase}'=Ready"
-                namespace: valkey-standalone
-          - description: Wait for Valkey-standalone to be ready
-            maxTotalSeconds: 90
-            wait:
-              cluster:
-                kind: statefulset.apps
-                name: "app.kubernetes.io/name: valkey"
-                condition: "'{.status.readyReplicas}'=1"
-                namespace: valkey-standalone
-          - description: Wait for Valkey-replicated to be healthy
-            maxTotalSeconds: 300
-            wait:
-              cluster:
-                kind: packages.uds.dev
-                name: valkey
-                condition: "'{.status.phase}'=Ready"
-                namespace: valkey-replicated-w-sentinel
-          - description: Wait for Valkey-replicated to be ready
-            maxTotalSeconds: 90
-            wait:
-              cluster:
-                kind: statefulset
-                name: app.kubernetes.io/name=valkey-node
-                condition: Ready
-                namespace: valkey-replicated-w-sentinel
           - description: Delete old jobs if they exist
             cmd: uds zarf tools kubectl -n valkey-test delete -f tests/valkey/test-job.yaml || true
           - description: Wait one minute because even when "ready" valkey isn't really ready.

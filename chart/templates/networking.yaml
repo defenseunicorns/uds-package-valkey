@@ -34,21 +34,3 @@ spec:
       mode: ISTIO_MUTUAL
       sni: valkey-node-{{ $i }}.valkey-headless.{{ $.Release.Namespace }}.svc.cluster.local
 {{- end }}
----
-# This enables comms that are IP based: https://github.com/istio/istio/issues/37423
-# The read replicas use each-other's IPs to talk once the sentinels tell them what
-# the IPs are.
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: valkey-clustering-exception
-  namespace: {{ .Release.Namespace }}
-spec:
-  mtls:
-    mode: STRICT
-  portLevelMtls:
-    6379:
-      mode: PERMISSIVE
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: valkey
