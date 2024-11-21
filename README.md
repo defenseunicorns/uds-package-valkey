@@ -35,23 +35,3 @@ Please see the [CONTRIBUTING.md](./CONTRIBUTING.md)
 ## Development
 
 When developing this package it is ideal to utilize the json schemas for UDS Bundles, Zarf Packages and Maru Tasks. This involves configuring your IDE to provide schema validation for the respective files used by each application. For guidance on how to set up this schema validation, please refer to the [guide](https://github.com/defenseunicorns/uds-common/blob/main/docs/uds-packages/development/development-ide-configuration.md) in uds-common.
-
-```bash
-docker run -it -v ~/.ssh:/home/ubuntu/.ssh ubuntu
-```
-
-
-```bash
-apt update
-apt install ssh -y
-
-eval "$(ssh-agent -s)"
-ssh-add /home/ubuntu/.ssh/id_rsa
-
-# Get this from the job logs
-ssh ymrm9nycskmKm3V4L2es8DqDG@nyc1.tmate.io
-
-# THe command which in my case was the main "test" command
-uds run actions:test-deploy --set FLAVOR=upstream --set TYPE=install
-
-```
