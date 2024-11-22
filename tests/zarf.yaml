@@ -24,8 +24,6 @@ components:
         before:
           - description: Delete old jobs if they exist
             cmd: uds zarf tools kubectl -n valkey-test delete -f tests/valkey/test-job.yaml || true
-          - description: Wait one minute because even when "ready" valkey isn't really ready.
-            cmd: sleep 60
         after:
           - description: Watch test jobs and report their conditions
             cmd: ./tests/watch-jobs.sh
