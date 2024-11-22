@@ -12,7 +12,6 @@
 
 * **deps:** update support-deps to v1.3.0 ([#51](https://github.com/defenseunicorns/uds-package-valkey/issues/51)) ([8890dd3](https://github.com/defenseunicorns/uds-package-valkey/commit/8890dd32a20299847f504caa16fc761e2ad8a90c))
 * **deps:** update support-deps to v1.4.0 ([#53](https://github.com/defenseunicorns/uds-package-valkey/issues/53)) ([70c5b12](https://github.com/defenseunicorns/uds-package-valkey/commit/70c5b127d9953d4acdc0e7816161f6d84a6df659))
-
 * **deps:** update valkey support dependencies ([#39](https://github.com/defenseunicorns/uds-package-valkey/issues/39)) ([7e5420e](https://github.com/defenseunicorns/uds-package-valkey/commit/7e5420eb557c75bfe455b685d88d30ea8c063fca))
 * update base pattern in CODEOWNERS file ([#49](https://github.com/defenseunicorns/uds-package-valkey/issues/49)) ([fb5d505](https://github.com/defenseunicorns/uds-package-valkey/commit/fb5d505ce9570eb8a9253ecc8f439b9ac8a32ae2))
 * update README.md ([#48](https://github.com/defenseunicorns/uds-package-valkey/issues/48)) ([21eb116](https://github.com/defenseunicorns/uds-package-valkey/commit/21eb1168cafd50d43d70e7dc3836ac0bc1556ceb))
