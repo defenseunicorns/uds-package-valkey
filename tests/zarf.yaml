@@ -23,7 +23,7 @@ components:
       onDeploy:
         before:
           - description: Delete old jobs if they exist
-            cmd: uds zarf tools kubectl -n valkey-test delete -f tests/valkey/test-job.yaml || true
+            cmd: ./zarf tools kubectl -n valkey-test delete -f tests/valkey/test-job.yaml || true
         after:
           - description: Watch test jobs and report their conditions
             cmd: ./tests/watch-jobs.sh
