@@ -7,6 +7,6 @@ copyPassword:
   secretName: ""
   secretKey: ""
 
-replicas: 3
+replicas: 0
 
 custom: []
