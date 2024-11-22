@@ -17,10 +17,6 @@ tasks:
       - cmd: uds zarf package create tests --architecture="${{ .inputs.architecture }}" --confirm --skip-sbom
 
   - name: test-valkey
-    inputs:
-      architecture:
-        description: The architecture of the package to create
-        default: ${UDS_ARCH}
     actions:
       - description: Deploy the test package into the cluster
         cmd: uds zarf package deploy "zarf-package-valkey-test-${{ .inputs.architecture }}-0.1.0.tar.zst" --confirm
