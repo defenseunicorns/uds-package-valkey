@@ -11,13 +11,13 @@ NAMESPACE="valkey-test"
 # Function to get the status of a job
 get_job_status() {
   local job_name="$1"
-  kubectl get job "${job_name}" -n "${NAMESPACE}" -o jsonpath='{.status.conditions[?(@.type=="Failed")].status}' 2>/dev/null
+  uds zarf tools kubectl get job "${job_name}" -n "${NAMESPACE}" -o jsonpath='{.status.conditions[?(@.type=="Failed")].status}' 2>/dev/null
 }
 
 # Function to check if a job is complete
 is_job_complete() {
   local job_name="$1"
-  kubectl get job "${job_name}" -n "${NAMESPACE}" -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' 2>/dev/null
+  uds zarf tools kubectl get job "${job_name}" -n "${NAMESPACE}" -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' 2>/dev/null
 }
 
 # Monitoring loop
@@ -29,9 +29,9 @@ while [[ -n "${JOBS}" ]]; do
     job_status="$(get_job_status "${job}")"
     if [[ "${job_status}" = "True" ]]; then
       echo "Error: Job '${job}' failed."
-      kubectl describe -n "${NAMESPACE}" jobs.batch "${job}"
-      kubectl describe namespace "${NAMESPACE}"
-      kubectl logs -n "${NAMESPACE}" jobs/"${job}"
+      uds zarf tools kubectl describe -n "${NAMESPACE}" jobs.batch "${job}"
+      uds zarf tools kubectl describe namespace "${NAMESPACE}"
+      uds zarf tools kubectl logs -n "${NAMESPACE}" jobs/"${job}"
       exit 1
     fi
 
