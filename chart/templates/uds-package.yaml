@@ -13,7 +13,6 @@ spec:
       targetPort: 9121
       portName: http-metrics
       description: Metrics
-    
   network:
     allow:
       - direction: Ingress

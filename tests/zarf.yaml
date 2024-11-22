@@ -9,29 +9,22 @@ metadata:
   version: 0.1.0
 
 components:
-  - name: test-valkey-connectivity
+  - name: test-valkey-instances
     required: true
     manifests:
-      - name: valkey-cli
-        namespace: valkey-cli
+      - name: valkey-test
+        namespace: valkey-test
         files:
           - valkey/uds-package.yaml
-          - valkey/valkey-cli.yaml
+          - valkey/test-job.yaml
     images:
       - docker.io/bitnami/valkey:8.0.1-debian-12-r2
     actions:
       onDeploy:
+        before:
+          - description: Delete old jobs if they exist
+            cmd: ./zarf tools kubectl -n valkey-test delete -f tests/valkey/test-job.yaml || true
         after:
-          - cmd: ./zarf tools kubectl get secret -n valkey-cli valkey --template='{{ index .data "valkey-password" }}' | base64 -d
-            mute: true
-            setVariables:
-              - name: VALKEY_PASSWORD
-                sensitive: true
-          - cmd: |
-              ./zarf tools kubectl exec -n valkey-cli valkey-cli -c valkey-cli -- \
-                sh -c "echo \"ping\\nset foo bar\\nget foo\" | valkey-cli -h valkey-master.valkey.svc.cluster.local -a ${ZARF_VAR_VALKEY_PASSWORD}"
-            setVariables:
-              - name: VALKEY_OUTPUT
-          - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep PONG
-          - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep OK
-          - cmd: echo ${ZARF_VAR_VALKEY_OUTPUT} | grep bar
+          - description: Watch test jobs and report their conditions
+            cmd: ./tests/watch-jobs.sh
+            maxTotalSeconds: 90

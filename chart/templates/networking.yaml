@@ -1,0 +1,36 @@
+# Copyright 2024 Defense Unicorns
+# SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
+
+# This removes the NR filter_not_found error that you get when you try to access
+# the primary node.
+{{- $replicas := int .Values.replicas }}
+{{- range $i, $e := until $replicas }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: valkey-headless-{{ $i }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  hosts:
+    - valkey-node-{{ $i }}.valkey-headless.{{ $.Release.Namespace }}.svc.cluster.local  # Matches pod-specific DNS names
+  ports:
+    - number: 6379
+      name: redis
+      protocol: TCP
+  location: MESH_INTERNAL
+  resolution: NONE
+---
+# This enables node-to-node communications
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: valkey-headless-{{ $i }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  host: valkey-node-{{ $i }}.valkey-headless.{{ $.Release.Namespace }}.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+      sni: valkey-node-{{ $i }}.valkey-headless.{{ $.Release.Namespace }}.svc.cluster.local
+{{- end }}

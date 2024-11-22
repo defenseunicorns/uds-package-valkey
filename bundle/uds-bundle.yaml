@@ -24,18 +24,73 @@ packages:
                 - direction: Ingress
                   selector:
                     app.kubernetes.io/name: valkey
-                  remoteNamespace: valkey-cli
+                  remoteNamespace: valkey-test
                   remoteSelector:
-                    app: valkey-cli
+                    app: valkey-test
                   port: 6379
                   description: "Ingress from Valkey CLI (for tests)"
             - path: copyPassword
               value:
                 enabled: true
-                namespace: valkey-cli
-                secretName: valkey
-                secretKey: valkey-password
+                namespace: valkey-test
+                secretName: valkey-standalone
+                # This allows us to mount it in as an env var and the valkey-cli picks it right up. Note: in
+                # production, mount this in as a file instead. It's less secure to use env variables for passwords.
+                secretKey: REDISCLI_AUTH
         valkey:
+          variables:
+            - name: VALKEY_RESOURCES
+              path: "master.resources"
+              default:
+                limits:
+                  cpu: 100m
+                  memory: 300Mi
+                requests:
+                  cpu: 100m
+                  memory: 300Mi
+  - name: valkey
+    path: ../
+    # x-release-please-start-version
+    ref: 8.0.1-uds.0
+    # x-release-please-end
+    overrides:
+      valkey:
+        uds-valkey-config:
+          namespace: valkey-replicated-w-sentinel
+          values:
+            - path: custom
+              value:
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: valkey-test
+                  remoteSelector:
+                    app: valkey-test
+                  port: 6379
+                  description: "Ingress from Valkey CLI (for tests)"
+                - direction: Ingress
+                  selector:
+                    app.kubernetes.io/name: valkey
+                  remoteNamespace: valkey-test
+                  remoteSelector:
+                    app: valkey-test
+                  port: 26379
+                  description: "Ingress from Valkey CLI (for tests) sentinel"
+            - path: copyPassword
+              value:
+                enabled: true
+                namespace: valkey-test
+                secretName: valkey-replicated-w-sentinel
+                secretKey: REDISCLI_AUTH
+            - path: replicas
+              value: 3  # Because replication is enabled and will spin up 3 replicas by default
+        valkey:
+          namespace: valkey-replicated-w-sentinel
+          values:
+            - path: architecture
+              value: replication
+            - path: sentinel.enabled  # https://github.com/bitnami/charts/blob/main/bitnami/valkey/values.yaml#L1143
+              value: true
           variables:
             - name: VALKEY_RESOURCES
               path: "master.resources"
