@@ -82,7 +82,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              # Ask the Sentinel which node is the primary node
+              # Ask the Sentinel which node is the primary node. 'mymaster' is the default name of the primary node.
               PRIMARY_ADDR="$(echo 'SENTINEL GET-PRIMARY-ADDR-BY-NAME mymaster' | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local -p 26379)"
               echo "Primary ADDR is: ${PRIMARY_ADDR}"
 
