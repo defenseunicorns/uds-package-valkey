@@ -19,7 +19,6 @@ Valkey is currently configured to expect a single user or workload to be using i
 
 ## High Availability
 
-The default Valkey configuration is a lone read/write node. This is sufficient for most use-cases. GitLab, for example, still recommends a single node architecture even in . It isn't until you reach  that they recommend replication (note the links speak of Redis for which Valkey is a drop-in replacement). For situations where the traffic requires higher availability, this package also supports the replicated architecture.
 
 The default Valkey configuration is a single read/write node, which is sufficient for most use cases. For example, GitLab recommends a single-node architecture even in [their 2,000 user reference architecture](https://docs.gitlab.com/ee/administration/reference_architectures/2k_users.html). They only suggest replication starting with [their 3000 user reference architecture](https://docs.gitlab.com/ee/administration/reference_architectures/3k_users.html) (note that the pages linked refer to Redis, for which Valkey is a drop-in replacement). For scenarios requiring higher availability, this package also supports a replicated architecture.
 
