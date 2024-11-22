@@ -79,9 +79,12 @@ This high-availability configuration will result in a few changes, some obvious,
 1. The single `valkey-master` pod will be replaced by pods named `valkey-node-0`, `valkey-node-1`, and so on per the requested number of `replicas`.
 2. Every `valkey-node` pod will now includes a Sentinel sidecar. It is accessed by contacting the valkey service at the Sentinel port `26379` rather than the read/write port `6379`.
 3. As may be guessed from those two changes, the valkey service name also changes from `valkey-master.<valkey namespace>.svc.cluster.local` to, depending on your use-case:
+
     - `valkey.<valkey namespace>.svc.cluster.local:26379` if trying to access a Sentinel.
     - `valkey.<valkey namespace>.svc.cluster.local:6379` if trying to _read_ data.
-    - `valkey-node-<?>.valkey-headless.<valkey namespace>.svc.cluster.local:6379` if trying to _write_ data. Note the `<?>` in that address. The write node (called the Primary node) is only known by asking a Sentinel for the address and can change dynamically. Calling the sentinel to know where the primary node is should be handled by the calling application and so not be relevant to most bundle development. If a Redis-ready application is given the address of the Sentinel service and the _read_ service that should be enough. For further clarity, see the Redis or Valkey documentation and review the tests for this Application Package where the Valkey CLI is used to communicate with both the standalone and replicated instances defined in the test bundle.
+    - `valkey-node-<?>.valkey-headless.<valkey namespace>.svc.cluster.local:6379` if trying to _write_ data.
+
+      > Note the `<?>` in that address. The write node (called the Primary node) is only known by asking a Sentinel for the address and can change dynamically. Calling the sentinel to know where the primary node is should be handled by the calling application and so not relevant to most bundle development. If a Redis-ready application is given the address of the Sentinel service and the _read_ service that should be enough. For further clarity, see the Redis or Valkey documentation and review the tests for this application package where the Valkey CLI is used to communicate with both the standalone and replicated instances defined in the test bundle.
 
 ### Alternative: Replication without Sentinel
 
