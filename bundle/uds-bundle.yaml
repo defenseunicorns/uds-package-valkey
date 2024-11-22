@@ -80,6 +80,8 @@ packages:
                 namespace: valkey-test
                 secretName: valkey-replicated-w-sentinel
                 secretKey: REDISCLI_AUTH
+            - path: replicas
+              value: 3  # Because replication is enabled and will spin up 3 replicas by default
         valkey:
           namespace: valkey-replicated-w-sentinel
           values:
