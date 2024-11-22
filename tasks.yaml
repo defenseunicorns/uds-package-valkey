@@ -49,6 +49,7 @@ tasks:
   - name: test-install
     description: Test the health of a Valkey deployment
     actions:
+      - task: create-dev-package
       - task: setup:k3d-test-cluster
       - task: create-deploy-test-bundle
       - task: compliance:validate
