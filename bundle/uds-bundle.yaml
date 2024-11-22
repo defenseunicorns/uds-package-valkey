@@ -34,7 +34,9 @@ packages:
                 enabled: true
                 namespace: valkey-test
                 secretName: valkey-standalone
-                secretKey: REDISCLI_AUTH  # This allows us to mount it in as an env var and the valkey-cli picks it right up
+                # This allows us to mount it in as an env var and the valkey-cli picks it right up. Note: in
+                # production, mount this in as a file instead. It's less secure to use env variables for passwords.
+                secretKey: REDISCLI_AUTH
         valkey:
           variables:
             - name: VALKEY_RESOURCES
