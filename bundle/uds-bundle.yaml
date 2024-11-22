@@ -36,8 +36,6 @@ packages:
                 namespace: valkey-test
                 secretName: valkey-standalone
                 secretKey: REDISCLI_AUTH  # This allows us to mount it in as an env var and the valkey-cli picks it right up
-            - path: replicas
-              value: 0  # Because this is the standalone instance.
         valkey:
           namespace: valkey
           variables:
