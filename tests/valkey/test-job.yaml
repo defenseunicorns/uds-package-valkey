@@ -99,18 +99,15 @@ spec:
               SET_OUTPUT=$(echo "set TEST_name ${POD_NAME}" | valkey-cli -h ${HOST} -p ${PORT})
               echo "${SET_OUTPUT}" | grep OK && echo "Set value via primary" || { echo "Failed to set value via primary. Output was: ${SET_OUTPUT}"; exit 1; }
 
-              # Ensure replicas return the value
-              GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
-              echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
-
-              GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
-              echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
-
-              GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
-              echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
-
-              GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
-              echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || { echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"; exit 1; }
+              # Ensure replicas return the value, repeat call multiple times to get load-balanced to different replicas and so ensure the data is being replicated effectively.
+              # This isn't a test of valkey specifically, but a test of the network policies to ensure the valkey cluster nodes are able to talk.
+              for i in {1..5}; do
+                  GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
+                  echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || {
+                      echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"
+                      exit 1
+                  }
+              done
 
               echo "All checks passed."
       restartPolicy: OnFailure
