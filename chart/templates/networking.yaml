@@ -18,6 +18,9 @@ spec:
     - number: 6379
       name: redis
       protocol: TCP
+    - number: 26379
+      name: sentinel
+      protocol: TCP
   location: MESH_INTERNAL
   resolution: NONE
 ---
