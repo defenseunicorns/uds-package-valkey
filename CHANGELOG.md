@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.0.1-uds.2](https://github.com/defenseunicorns/uds-package-valkey/compare/v8.0.1-uds.1...v8.0.1-uds.2) (2024-12-03)
+
+
+### Bug Fixes
+
+* added service entry for sentinel port on headless pods ([#56](https://github.com/defenseunicorns/uds-package-valkey/issues/56)) ([2dcd8cc](https://github.com/defenseunicorns/uds-package-valkey/commit/2dcd8cc52c73cd148e2875b885f7f934624cb175))
+
+
+### Miscellaneous
+
+* **deps:** update valkey package dependencies ([#38](https://github.com/defenseunicorns/uds-package-valkey/issues/38)) ([f49beaf](https://github.com/defenseunicorns/uds-package-valkey/commit/f49beafd7a1f92194176cf347f252bcb1b2676ff))
+
 ## [8.0.1-uds.1](https://github.com/defenseunicorns/uds-package-valkey/compare/v8.0.1-uds.0...v8.0.1-uds.1) (2024-11-22)
 
 
