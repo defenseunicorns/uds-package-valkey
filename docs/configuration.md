@@ -4,9 +4,9 @@ Valkey configured through the upstream [Bitnami Valkey chart](https://github.com
 
 ## Networking
 
-Network policies are controlled via the `uds-valkey-config` chart in accordance with the [common patterns for networking within UDS Software Factory](https://github.com/defenseunicorns/uds-software-factory/blob/main/docs/networking.md).  Because Valkey does not interact with external resources like databases or object storage it only implements `custom` networking for the `valkey` namespace:
+Network policies are controlled via the `uds-valkey-config` chart in accordance with the [common patterns for networking within UDS Software Factory](https://github.com/defenseunicorns/uds-software-factory/blob/main/docs/networking.md).  Because Valkey does not interact with external resources like databases or object storage it only implements `additionalNetworkAllow` networking for the `valkey` namespace:
 
-- `custom`: sets custom network policies for the `valkey` namespace (i.e. to allow clients like GitLab to connect)
+- `additionalNetworkAllow`: sets custom network policies for the `valkey` namespace (i.e. to allow clients like GitLab to connect)
 
 ## Cross-Namespace Password
 
@@ -25,7 +25,7 @@ The default Valkey configuration is a single read/write node, which is sufficien
 
 The configuration changes required to switch from the standalone to the replicated (with sentinel) architecture can be derived by comparing the two valkey instances in the [test bundle definition](../bundle/uds-bundle.yaml). The changes are as follows:
 
-1. Add an ingress to the sentinel port in the `custom` network rules in the `uds-valkey-config` chart. This is unnecessary if not enabling the sentinel later (not recommended).
+1. Add an ingress to the sentinel port in the `additionalNetworkAllow` network rules in the `uds-valkey-config` chart. This is unnecessary if not enabling the sentinel later (not recommended).
 
 ```yaml
 packages:
