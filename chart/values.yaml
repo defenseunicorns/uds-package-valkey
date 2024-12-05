@@ -9,4 +9,4 @@ copyPassword:
 
 replicas: 0
 
-custom: []
+additionalNetworkAllow: []
