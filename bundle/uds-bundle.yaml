@@ -5,16 +5,12 @@ kind: UDSBundle
 metadata:
   name: valkey-test
   description: A UDS bundle for deploying Valkey and on a development cluster
-  # x-release-please-start-version
-  version: 8.0.1-uds.2
-  # x-release-please-end
+  version: dev
 
 packages:
   - name: valkey
     path: ../
-    # x-release-please-start-version
-    ref: 8.0.1-uds.2
-    # x-release-please-end
+    ref: dev
     overrides:
       valkey:
         uds-valkey-config:
@@ -50,9 +46,7 @@ packages:
                   memory: 300Mi
   - name: valkey
     path: ../
-    # x-release-please-start-version
-    ref: 8.0.1-uds.2
-    # x-release-please-end
+    ref: dev
     overrides:
       valkey:
         uds-valkey-config:
