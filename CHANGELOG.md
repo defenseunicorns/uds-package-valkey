@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.0.1-uds.3](https://github.com/defenseunicorns/uds-package-valkey/compare/v8.0.1-uds.2...v8.0.1-uds.3) (2024-12-10)
+
+
+### Miscellaneous
+
+* **deps:** update valkey package dependencies ([#57](https://github.com/defenseunicorns/uds-package-valkey/issues/57)) ([376dbac](https://github.com/defenseunicorns/uds-package-valkey/commit/376dbac33b490f7e05464eef85638c4256a72d69))
+* update custom network properties key ([#58](https://github.com/defenseunicorns/uds-package-valkey/issues/58)) ([4bf3aaa](https://github.com/defenseunicorns/uds-package-valkey/commit/4bf3aaa9d34efb38d5327f62754929ffeab7653f))
+
 ## [8.0.1-uds.2](https://github.com/defenseunicorns/uds-package-valkey/compare/v8.0.1-uds.1...v8.0.1-uds.2) (2024-12-03)
 
 
