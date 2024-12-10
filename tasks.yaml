@@ -74,7 +74,3 @@ tasks:
       - task: create-deploy-test-bundle
       - description: Publish the package
         task: publish:package
-        with:
-          # x-release-please-start-version
-          version: "8.0.1-uds.2"
-          # x-release-please-end
