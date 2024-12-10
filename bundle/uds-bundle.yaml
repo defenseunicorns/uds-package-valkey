@@ -46,9 +46,7 @@ packages:
                   memory: 300Mi
   - name: valkey
     path: ../
-    # x-release-please-start-version
-    ref: 8.0.1-uds.2
-    # x-release-please-end
+    ref: dev
     overrides:
       valkey:
         uds-valkey-config:
