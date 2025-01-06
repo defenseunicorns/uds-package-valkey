@@ -6,9 +6,7 @@ metadata:
   name: valkey
   description: "A deployment of Valkey (a Redis alternative by the Linux Foundation)"
   url: https://github.com/valkey-io/valkey
-  # x-release-please-start-version
-  version: "8.0.1-uds.0"
-  # x-release-please-end
+  version: "dev"
 
 components:
   - name: valkey
@@ -22,8 +20,9 @@ components:
         valuesFiles:
           - ./values/upstream-values.yaml
     images:
-      - bitnami/valkey:8.0.1-debian-12-r2
-      - docker.io/bitnami/redis-exporter:1.65.0-debian-12-r2
+      - bitnami/valkey:8.0.1-debian-12-r4
+      - bitnami/redis-exporter:1.66.0-debian-12-r3
+      - bitnami/valkey-sentinel:8.0.1-debian-12-r4
 
   - name: valkey
     required: true
@@ -37,4 +36,5 @@ components:
           - ./values/unicorn-values.yaml
     images:
       - cgr.dev/du-uds-defenseunicorns/valkey:8.0.1
-      - cgr.dev/du-uds-defenseunicorns/prometheus-redis-exporter-bitnami:1.65.0
+      - cgr.dev/du-uds-defenseunicorns/prometheus-redis-exporter-bitnami:1.66.0
+      - bitnami/valkey-sentinel:8.0.1-debian-12-r4

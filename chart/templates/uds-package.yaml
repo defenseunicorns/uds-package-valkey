@@ -13,7 +13,6 @@ spec:
       targetPort: 9121
       portName: http-metrics
       description: Metrics
-    
   network:
     allow:
       - direction: Ingress
@@ -22,7 +21,7 @@ spec:
         remoteGenerated: IntraNamespace
 
       # Custom rules to allow clients to connect
-    {{- range .Values.custom }}
+    {{- range .Values.additionalNetworkAllow }}
       - direction: {{ .direction }}
         selector:
           {{ .selector | toYaml | nindent 10 }}

@@ -3,16 +3,16 @@
 
 includes:
   - test: ./tasks/test.yaml
-  - create: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/create.yaml
-  - publish: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/publish.yaml
-  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/lint.yaml
-  - pull: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/pull.yaml
-  - deploy: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/deploy.yaml
-  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/setup.yaml
-  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/actions.yaml
-  - badge: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/badge.yaml
-  - upgrade: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/upgrade.yaml
-  - compliance: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.2.2/tasks/compliance.yaml
+  - create: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/create.yaml
+  - publish: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/publish.yaml
+  - lint: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/lint.yaml
+  - pull: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/pull.yaml
+  - deploy: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/deploy.yaml
+  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/setup.yaml
+  - actions: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/actions.yaml
+  - badge: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/badge.yaml
+  - upgrade: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/upgrade.yaml
+  - compliance: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.6.1/tasks/compliance.yaml
 
 tasks:
   - name: default
@@ -34,7 +34,6 @@ tasks:
     actions:
       - task: create:test-bundle
       - task: deploy:test-bundle
-      - task: setup:create-doug-user
       - task: test:all
 
   - name: dev
@@ -60,7 +59,6 @@ tasks:
       - task: upgrade:create-latest-tag-bundle
       - task: setup:k3d-test-cluster
       - task: deploy:test-bundle
-      - task: setup:create-doug-user
       - task: compliance:validate
       - task: create-dev-package
       - task: create-deploy-test-bundle
@@ -76,7 +74,3 @@ tasks:
       - task: create-deploy-test-bundle
       - description: Publish the package
         task: publish:package
-        with:
-          # x-release-please-start-version
-          version: "8.0.1-uds.0"
-          # x-release-please-end

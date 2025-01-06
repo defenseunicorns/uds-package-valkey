@@ -1,5 +1,33 @@
 # Changelog
 
+## [8.0.1-uds.2](https://github.com/defenseunicorns/uds-package-valkey/compare/v8.0.1-uds.1...v8.0.1-uds.2) (2024-12-03)
+
+
+### Bug Fixes
+
+* added service entry for sentinel port on headless pods ([#56](https://github.com/defenseunicorns/uds-package-valkey/issues/56)) ([2dcd8cc](https://github.com/defenseunicorns/uds-package-valkey/commit/2dcd8cc52c73cd148e2875b885f7f934624cb175))
+
+
+### Miscellaneous
+
+* **deps:** update valkey package dependencies ([#38](https://github.com/defenseunicorns/uds-package-valkey/issues/38)) ([f49beaf](https://github.com/defenseunicorns/uds-package-valkey/commit/f49beafd7a1f92194176cf347f252bcb1b2676ff))
+
+## [8.0.1-uds.1](https://github.com/defenseunicorns/uds-package-valkey/compare/v8.0.1-uds.0...v8.0.1-uds.1) (2024-11-22)
+
+
+### Features
+
+* support replicated architecture w/ sentinel ([#50](https://github.com/defenseunicorns/uds-package-valkey/issues/50)) ([ddef56c](https://github.com/defenseunicorns/uds-package-valkey/commit/ddef56c31ce2defa7ca28003c103a8fdd1fa9fad))
+
+
+### Miscellaneous
+
+* **deps:** update support-deps to v1.3.0 ([#51](https://github.com/defenseunicorns/uds-package-valkey/issues/51)) ([8890dd3](https://github.com/defenseunicorns/uds-package-valkey/commit/8890dd32a20299847f504caa16fc761e2ad8a90c))
+* **deps:** update support-deps to v1.4.0 ([#53](https://github.com/defenseunicorns/uds-package-valkey/issues/53)) ([70c5b12](https://github.com/defenseunicorns/uds-package-valkey/commit/70c5b127d9953d4acdc0e7816161f6d84a6df659))
+* **deps:** update valkey support dependencies ([#39](https://github.com/defenseunicorns/uds-package-valkey/issues/39)) ([7e5420e](https://github.com/defenseunicorns/uds-package-valkey/commit/7e5420eb557c75bfe455b685d88d30ea8c063fca))
+* update base pattern in CODEOWNERS file ([#49](https://github.com/defenseunicorns/uds-package-valkey/issues/49)) ([fb5d505](https://github.com/defenseunicorns/uds-package-valkey/commit/fb5d505ce9570eb8a9253ecc8f439b9ac8a32ae2))
+* update README.md ([#48](https://github.com/defenseunicorns/uds-package-valkey/issues/48)) ([21eb116](https://github.com/defenseunicorns/uds-package-valkey/commit/21eb1168cafd50d43d70e7dc3836ac0bc1556ceb))
+
 ## [8.0.1-uds.0](https://github.com/defenseunicorns/uds-package-valkey/compare/v7.2.7-uds.0...v8.0.1-uds.0) (2024-10-28)
 
 

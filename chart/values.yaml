@@ -7,4 +7,6 @@ copyPassword:
   secretName: ""
   secretKey: ""
 
-custom: []
+replicas: 0
+
+additionalNetworkAllow: []
