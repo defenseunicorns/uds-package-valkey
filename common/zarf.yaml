@@ -16,7 +16,7 @@ components:
         version: 0.1.0
         localPath: ../chart
       - name: valkey
-        version: 2.2.1
+        version: 2.2.3
         namespace: valkey
         url: oci://ghcr.io/defenseunicorns/bitferno/valkey
         valuesFiles:
