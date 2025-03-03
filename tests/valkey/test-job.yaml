@@ -31,7 +31,7 @@ spec:
           args:
             - |
               # Set the standalone Valkey host and port
-              HOST="valkey-master.valkey.svc.cluster.local"
+              HOST="valkey-primary.valkey.svc.cluster.local"
               PORT="6379"
 
               # Check if the Valkey server responds to PING
@@ -81,8 +81,8 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              # Ask the Sentinel which node is the primary node. 'mymaster' is the default name of the primary node.
-              PRIMARY_ADDR="$(echo 'SENTINEL GET-PRIMARY-ADDR-BY-NAME mymaster' | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local -p 26379)"
+              # Ask the Sentinel which node is the primary node. 'myprimary' is the default name of the primary node.
+              PRIMARY_ADDR="$(echo 'SENTINEL GET-PRIMARY-ADDR-BY-NAME myprimary' | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local -p 26379)"
               echo "Primary ADDR is: ${PRIMARY_ADDR}"
 
               # Extract HOST and PORT using sed

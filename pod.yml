@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valkey-test-replicated-w-sentinel
+  labels:
+    app: valkey-test
+spec:
+  containers:
+    - name: valkey-test
+      image: bitnami/valkey:8.0.2-debian-12-r0
+      envFrom:  # Note: in production, do not store sensitive data (like passwords) in env vars. Mount in as a file instead.
+        - secretRef:
+            name: valkey-replicated-w-sentinel
+            optional: false
+
+      env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      command: ["/bin/sh", "-c"]
+      args: ["sleep infinity"]
+      # args:
+      #   - |
+      #     # Ask the Sentinel which node is the primary node. 'myprimary' is the default name of the primary node.
+      #     PRIMARY_ADDR="$(echo 'SENTINEL GET-PRIMARY-ADDR-BY-NAME myprimary' | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local -p 26379)"
+      #     echo "Primary ADDR is: ${PRIMARY_ADDR}"
+
+      #     # Extract HOST and PORT using sed
+      #     HOST=$(echo "${PRIMARY_ADDR}" | sed -n '1p')
+      #     PORT=$(echo "${PRIMARY_ADDR}" | sed -n '2p')
+      #     echo "Primary is ${HOST}:${PORT}"
+
+      #     # Check if primary responds to PING
+      #     PING_OUTPUT=$(echo "ping" | valkey-cli -h ${HOST} -p ${PORT})
+      #     echo "${PING_OUTPUT}" | grep PONG && echo "Primary ponged back" || { echo "Failed to contact primary. Output was: ${PING_OUTPUT}"; exit 1; }
+
+      #     # Try to set a value on the primary
+      #     SET_OUTPUT=$(echo "set TEST_name ${POD_NAME}" | valkey-cli -h ${HOST} -p ${PORT})
+      #     echo "${SET_OUTPUT}" | grep OK && echo "Set value via primary" || { echo "Failed to set value via primary. Output was: ${SET_OUTPUT}"; exit 1; }
+
+      #     # Ensure replicas return the value, repeat call multiple times to get load-balanced to different replicas and so ensure the data is being replicated effectively.
+      #     # This isn't a test of valkey specifically, but a test of the network policies to ensure the valkey cluster nodes are able to talk.
+      #     for i in {1..5}; do
+      #         GET_OUTPUT=$(echo "get TEST_name" | valkey-cli -h valkey.valkey-replicated-w-sentinel.svc.cluster.local)
+      #         echo "${GET_OUTPUT}" | grep "${POD_NAME}" && echo "Got value via replica" || {
+      #             echo "Failed to get value via replica. Output was: ${GET_OUTPUT}"
+      #             exit 1
+      #         }
+      #     done
+
+      #     echo "All checks passed."
+
+
+
+
+
+
+
+

@@ -36,7 +36,7 @@ packages:
         valkey:
           variables:
             - name: VALKEY_RESOURCES
-              path: "master.resources"
+              path: "primary.resources"
               default:
                 limits:
                   cpu: 100m
@@ -87,7 +87,7 @@ packages:
               value: true
           variables:
             - name: VALKEY_RESOURCES
-              path: "master.resources"
+              path: "primary.resources"
               default:
                 limits:
                   cpu: 100m
