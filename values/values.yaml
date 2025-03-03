@@ -9,3 +9,6 @@ auth:
 
 metrics:
   enabled: true
+
+sentinel:
+  primarySet: mymaster
