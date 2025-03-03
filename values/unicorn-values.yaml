@@ -3,7 +3,7 @@
 
 image:
   registry: cgr.dev
-  repository: du-uds-defenseunicorns/valkey
+  repository: du-uds-defenseunicorns/valkey-fips
   tag: 8.0.2
 
 sentinel:
