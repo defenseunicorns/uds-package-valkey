@@ -76,9 +76,9 @@ packages:
 
 This high-availability configuration will result in a few changes, some obvious, some less obvious:
 
-1. The single `valkey-master` pod will be replaced by pods named `valkey-node-0`, `valkey-node-1`, and so on per the requested number of `replicas`.
+1. The single `valkey-primary` pod will be replaced by pods named `valkey-node-0`, `valkey-node-1`, and so on per the requested number of `replicas`.
 2. Every `valkey-node` pod will now includes a Sentinel sidecar. It is accessed by contacting the valkey service at the Sentinel port `26379` rather than the read/write port `6379`. It can also be accessed headlessly at `valkey-node-0.valkey-headless.<valkey namespace>.svc.cluster.local:26379`.
-3. As may be guessed from those two changes, the valkey service name also changes from `valkey-master.<valkey namespace>.svc.cluster.local` to, depending on your use-case:
+3. As may be guessed from those two changes, the valkey service name also changes from `valkey-primary.<valkey namespace>.svc.cluster.local` to, depending on your use-case:
 
     - `valkey.<valkey namespace>.svc.cluster.local:26379` or the headless pod addresses if trying to access a Sentinel.
     - `valkey.<valkey namespace>.svc.cluster.local:6379` if trying to _read_ data.
