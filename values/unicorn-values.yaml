@@ -16,4 +16,4 @@ metrics:
   image:
     registry: cgr.dev
     repository: du-uds-defenseunicorns/prometheus-redis-exporter-bitnami
-    tag: 1.67.0
+    tag: 1.68.0
