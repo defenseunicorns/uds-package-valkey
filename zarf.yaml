@@ -4,10 +4,15 @@
 kind: ZarfPackageConfig
 metadata:
   name: valkey
-  description: "A deployment of Valkey (a Redis alternative by the Linux Foundation)"
+  description: "Valkey is an open source (BSD) high-performance key/value datastore that supports a variety of workloads such as caching, message queues, and can act as a primary database. Valkey can run as either a standalone daemon or in a cluster, with options for replication and high availability. Valkey natively supports a rich collection of datatypes, including strings, numbers, hashes, lists, sets, sorted sets, bitmaps, hyperloglogs and more. You can operate on data structures in-place with an expressive collection of commands."
   url: https://github.com/valkey-io/valkey
   version: "dev"
-
+  annotations:
+    dev.uds.title: Valkey
+    dev.uds.tagline: '**An Open Source, In-memory Data Store**'
+    dev.uds.categories: Databases, IT Management
+    dev.uds.keywords: Key/Value Datastore, High Performance, Caching, Message Queues, Primary Database, Replication, High Availability, Data Structures, In-Place Operations, Clustering, Rich Datatypes, Open Source
+    dev.uds.icon: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgZmlsbD0iI2ZmZiIgeG1sbnM6dj0iaHR0cHM6Ly92ZWN0YS5pby9uYW5vIj48cGF0aCBmaWxsLW9wYWNpdHk9Ii4wMSIgZD0iTTEyLDEyaDU2djU2SDEyeiIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTI1Ljc5Niw1OS4xNjVsLTEwLjAzMi02LjI3NlYyNi4wNjRMNDAuMjk3LDEybDIzLjkzOCwxNC4wODd2MjguMjE2TDM5LjkxNyw2OGwtOC40NDMtNS4yODJ2LTExLjMxLTEuNTQ0TDI2Ljg5Niw0N1YzMi40NTNsMTMuMjU1LTcuNTk5LDEyLjk1MiA3LjYyMnYxNS4yNDNsLTEwLjI1NCw1Ljc3NXYtNi4xMzljMy4wNzQtMS4xODQsNS4yOC00LjIyNiw1LjI4LTcuODE3LDAtNC42MjgtMy42NjYtOC4zNDYtOC4xMjktOC4zNDZzLTguMTI5LDMuNzE4LTguMTI5LDguMzQ2YzAsMy41OTEgMi4yMDYsNi42MzQgNS4yOCw3LjgxN3YxMS42MzJsMi45MzIsMS44MzQgMTcuOTgtMTAuMTI2VjI5LjYxN0w0MC4yNTcsMTkuMTM5bC0xOC4zMiwxMC41MDJWNDkuNDdsMy44NTksMi40MTR2Ny4yODJ6TTQsMzUuNzAzYzIuMDIsMCAzLjYxOCwxLjc0IDMuNjE4LDMuODM1UzQyLjAyLDQzLjM3MyA0LDQzLjM3M3MtMy42MTgtMS43NC0zLjYxOC0zLjgzNVMzNy45OCwzNS43MDMgNCwzNS43MDN6Ii8+PC9zdmc+
 components:
   - name: valkey
     required: true
@@ -23,7 +28,6 @@ components:
       - bitnami/valkey:8.0.2-debian-12-r5
       - bitnami/redis-exporter:1.68.0-debian-12-r0
       - bitnami/valkey-sentinel:8.0.2-debian-12-r5
-
   - name: valkey
     required: true
     only:
