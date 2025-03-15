@@ -26,7 +26,7 @@ components:
           - ./values/upstream-values.yaml
     images:
       - bitnami/valkey:8.0.2-debian-12-r5
-      - bitnami/redis-exporter:1.68.0-debian-12-r0
+      - bitnami/redis-exporter:1.69.0-debian-12-r0
       - bitnami/valkey-sentinel:8.0.2-debian-12-r5
   - name: valkey
     required: true
