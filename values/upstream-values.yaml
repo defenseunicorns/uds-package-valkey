@@ -4,16 +4,16 @@
 image:
   registry: docker.io
   repository: bitnami/valkey
-  tag: 8.0.2-debian-12-r5
+  tag: 8.0.2-debian-12-r6
 
 sentinel:
   image:
     registry: docker.io
     repository: bitnami/valkey-sentinel
-    tag: 8.0.2-debian-12-r5
+    tag: 8.0.2-debian-12-r6
 
 metrics:
   image:
     registry: docker.io
     repository: bitnami/redis-exporter
-    tag: 1.68.0-debian-12-r0
+    tag: 1.69.0-debian-12-r1
