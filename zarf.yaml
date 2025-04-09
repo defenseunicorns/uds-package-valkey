@@ -25,9 +25,9 @@ components:
         valuesFiles:
           - ./values/upstream-values.yaml
     images:
-      - bitnami/valkey:8.0.2-debian-12-r6
-      - bitnami/redis-exporter:1.69.0-debian-12-r1
-      - bitnami/valkey-sentinel:8.0.2-debian-12-r6
+      - bitnami/valkey:8.1.0-debian-12-r2
+      - bitnami/redis-exporter:1.69.0-debian-12-r4
+      - bitnami/valkey-sentinel:8.1.0-debian-12-r0
   - name: valkey
     required: true
     only:
@@ -39,6 +39,6 @@ components:
         valuesFiles:
           - ./values/unicorn-values.yaml
     images:
-      - cgr.dev/du-uds-defenseunicorns/valkey:8.0.2
+      - cgr.dev/du-uds-defenseunicorns/valkey:8.1.0
       - cgr.dev/du-uds-defenseunicorns/prometheus-redis-exporter-bitnami:1.69.0
-      - bitnami/valkey-sentinel:8.0.2-debian-12-r6
+      - bitnami/valkey-sentinel:8.1.0-debian-12-r0
