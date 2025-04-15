@@ -10,10 +10,10 @@ sentinel:
   image:  # Unicorn flavor option DNE
     registry: docker.io
     repository: bitnami/valkey-sentinel
-    tag: 8.1.0-debian-12-r0
+    tag: 8.1.0-debian-12-r1
 
 metrics:
   image:
     registry: cgr.dev
     repository: du-uds-defenseunicorns/prometheus-redis-exporter-bitnami
-    tag: 1.69.0
+    tag: 1.70.0
