@@ -14,6 +14,8 @@ spec:
       portName: http-metrics
       description: Metrics
   network:
+    serviceMesh:
+      mode: {{ if .Values.ambient }}ambient{{ else }}sidecar{{ end }}
     allow:
       - direction: Ingress
         remoteGenerated: IntraNamespace
