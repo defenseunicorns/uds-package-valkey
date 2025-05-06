@@ -3,6 +3,7 @@
 
 # This removes the NR filter_not_found error that you get when you try to access
 # the primary node.
+{{ if eq .Values.ambient false }}
 {{- $replicas := int .Values.replicas }}
 {{- range $i, $e := until $replicas }}
 ---
@@ -36,4 +37,5 @@ spec:
     tls:
       mode: ISTIO_MUTUAL
       sni: valkey-node-{{ $i }}.valkey-headless.{{ $.Release.Namespace }}.svc.cluster.local
+{{- end }}
 {{- end }}
