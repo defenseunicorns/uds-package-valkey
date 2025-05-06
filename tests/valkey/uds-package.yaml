@@ -7,6 +7,8 @@ metadata:
   name: valkey-test
 spec:
   network:
+    serviceMesh:
+      mode: ambient
     allow:
       - direction: Egress
         selector:
