@@ -10,7 +10,7 @@ sentinel:
   image:  # Unicorn flavor option DNE
     registry: quay.io
     repository: rfcurated/valkey-sentinel
-    tag: 8.1.1-debian-12-r1
+    tag: 8.1.1-jammy-bnt-fips-rfcurated
 
 metrics:
   image:
