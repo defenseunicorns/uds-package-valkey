@@ -9,7 +9,7 @@ metadata:
   version: "dev"
   annotations:
     dev.uds.title: Valkey
-    dev.uds.tagline: '**An Open Source, In-memory Data Store**'
+    dev.uds.tagline: An Open Source, In-memory Data Store
     dev.uds.categories: Databases, IT Management
     dev.uds.keywords: Key/Value Datastore, High Performance, Caching, Message Queues, Primary Database, Replication, High Availability, Data Structures, In-Place Operations, Clustering, Rich Datatypes, Open Source
     dev.uds.icon: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgZmlsbD0iI2ZmZiIgeG1sbnM6dj0iaHR0cHM6Ly92ZWN0YS5pby9uYW5vIj48cGF0aCBmaWxsLW9wYWNpdHk9Ii4wMSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOm11bHRpcGx5IiBkPSJNMTIgMTJoNTZ2NTZIMTJ6Ii8+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMjUuNzk2IDU5LjE2NWwtMTAuMDMyLTYuMjc2VjI2LjA2NEw0MC4yOTcgMTJsMjMuOTM4IDE0LjA4N3YyOC4yMTZMMzkuOTE3IDY4bC04LjQ0My01LjI4MnYtMTEuMzEtMS41NDRMMjYuODk2IDQ3VjMyLjQ1M2wxMy4yNTUtNy41OTkgMTIuOTUyIDcuNjIydjE1LjI0M2wtMTAuMjU0IDUuNzc1di02LjEzOWMzLjA3NC0xLjE4NCA1LjI4LTQuMjI2IDUuMjgtNy44MTcgMC00LjYyOC0zLjY2Ni04LjM0Ni04LjEyOS04LjM0NnMtOC4xMjkgMy43MTgtOC4xMjkgOC4zNDZjMCAzLjU5MSAyLjIwNiA2LjYzNCA1LjI4IDcuODE3djExLjYzMmwyLjkzMiAxLjgzNCAxNy45OC0xMC4xMjZWMjkuNjE3TDQwLjI1NyAxOS4xMzlsLTE4LjMyIDEwLjUwMlY0OS40N2wzLjg1OSAyLjQxNHY3LjI4MnpNNDAgMzUuNzAzYzIuMDIgMCAzLjYxOCAxLjc0IDMuNjE4IDMuODM1UzQyLjAyIDQzLjM3MyA0MCA0My4zNzNzLTMuNjE4LTEuNzQtMy42MTgtMy44MzVTMzcuOTggMzUuNzAzIDQwIDM1LjcwM3oiLz48L3N2Zz4=
