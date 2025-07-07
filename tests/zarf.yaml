@@ -18,7 +18,7 @@ components:
           - valkey/uds-package.yaml
           - valkey/test-job.yaml
     images:
-      - bitnami/valkey:8.1.1-debian-12-r1
+      - bitnami/valkey:8.1.2-debian-12-r0
     actions:
       onDeploy:
         before:

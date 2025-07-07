@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: valkey-test
-          image: bitnami/valkey:8.1.1-debian-12-r1
+          image: bitnami/valkey:8.1.2-debian-12-r0
           envFrom:  # Note: in production, do not store sensitive data (like passwords) in env vars. Mount in as a file instead.
             - secretRef:
                 name: valkey-standalone
@@ -68,7 +68,7 @@ spec:
     spec:
       containers:
         - name: valkey-test
-          image: bitnami/valkey:8.1.1-debian-12-r1
+          image: bitnami/valkey:8.1.2-debian-12-r0
           envFrom:  # Note: in production, do not store sensitive data (like passwords) in env vars. Mount in as a file instead.
             - secretRef:
                 name: valkey-replicated-w-sentinel
