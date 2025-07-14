@@ -7,4 +7,4 @@ flavors:
     version: 8.1.3-uds.0
   - name: unicorn
     # renovate-uds: datasource=docker depName=quay.io/rfcurated/valkey/valkey
-    version: 8.1.2-uds.0
+    version: 8.1.3-uds.0
