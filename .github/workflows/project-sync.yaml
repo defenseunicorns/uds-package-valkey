@@ -1,0 +1,27 @@
+name: Add to Org Project
+on:
+  issues:
+    types: [opened, reopened, labeled, edited, transferred]
+  pull_request:
+    types: [opened, reopened, labeled, edited]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  add:
+    permissions:
+      contents: read
+      issues: read
+    uses: uds-packages/workflows/.github/workflows/callable-project-sync.yaml@eaa76ea2a70893dca6e49ec087935590944448e9 # v0.1.0
+    with:
+      destination_org: uds-packages
+      project_number: 2
+      # Optional label filter (only add when item has any of these labels)
+      filter_labels: "triage,needs-review"
+      label_operator: "AND"
+      app_id: ${{ vars.DEFENSEUNICORNS_PROJECT_SYNC_APP_ID }}
+    secrets:
+      APP_PRIVATE_KEY: ${{ secrets.DEFENSEUNICORNS_PROJECT_SYNC_APP_PRIVATE_KEY }}
+      
