@@ -24,4 +24,3 @@ jobs:
       app_id: ${{ vars.DEFENSEUNICORNS_PROJECT_SYNC_APP_ID }}
     secrets:
       APP_PRIVATE_KEY: ${{ secrets.DEFENSEUNICORNS_PROJECT_SYNC_APP_PRIVATE_KEY }}
-      
