@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later OR LicenseRef-Defense-Unicorns-Commercial
 
 includes:
-  - utils: ./utils.yaml
+  - utils: https://raw.githubusercontent.com/defenseunicorns/uds-common/v1.18.0/tasks/utils.yaml
 
 variables:
   - name: FLAVOR
