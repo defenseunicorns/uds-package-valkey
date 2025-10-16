@@ -12,3 +12,24 @@ metrics:
 
 sentinel:
   primarySet: mymaster
+
+  configuration: |-
+    sentinel resolve-hostnames yes
+    sentinel announce-hostnames yes
+
+  # The valkey-sentinel container needs to be able to write to the sentinel.conf file.
+  # Copy the file to a writable directory and run valkey-server in the sentinel mode.
+  extraVolumes:
+    - name: sentinel-conf
+      emptyDir: {}
+
+  extraVolumeMounts:
+    - name: sentinel-conf
+      mountPath: /opt/bitnami/valkey-sentinel/sentinel-conf
+
+  command: ["/bin/sh", "-c"]
+  args:
+    - |
+      cp /opt/bitnami/valkey-sentinel/mounted-etc/sentinel.conf /opt/bitnami/valkey-sentinel/sentinel-conf/sentinel.conf && \
+      chown 1001:1001 /opt/bitnami/valkey-sentinel/sentinel-conf/sentinel.conf && \
+      exec valkey-server /opt/bitnami/valkey-sentinel/sentinel-conf/sentinel.conf --sentinel
