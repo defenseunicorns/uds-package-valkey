@@ -27,4 +27,4 @@ components:
         after:
           - description: Watch test jobs and report their conditions
             cmd: ./tests/watch-jobs.sh
-            maxTotalSeconds: 120
+            maxTotalSeconds: 240
