@@ -12,3 +12,46 @@ metrics:
 
 sentinel:
   primarySet: mymaster
+
+  # The valkey-sentinel container needs to be able to write to the sentinel.conf file.
+  # Copy the file to a writable directory and run valkey-server in the sentinel mode.
+  extraVolumes:
+    - name: sentinel-conf
+      emptyDir: {}
+    - name: valkey-secret
+      secret:
+        secretName: valkey-password
+        items:
+          - key: valkey-password
+            path: valkey-password
+
+  extraVolumeMounts:
+    - name: sentinel-conf
+      mountPath: /opt/bitnami/valkey-sentinel/sentinel-conf
+    - name: valkey-secret
+      mountPath: /secrets/valkey-sentinel
+
+  command: ["/bin/sh", "-c"]
+  args:
+    - |
+      PW_FILE="/secrets/valkey-sentinel/valkey-password"
+      PW="$(cat "$PW_FILE")"
+
+      cp /opt/bitnami/valkey-sentinel/mounted-etc/sentinel.conf /opt/bitnami/valkey-sentinel/sentinel-conf/sentinel.conf && \
+      chown 1001:1001 /opt/bitnami/valkey-sentinel/sentinel-conf/sentinel.conf && \
+
+      cat > /opt/bitnami/valkey-sentinel/sentinel-conf/sentinel.conf <<EOF
+      port 26379
+      sentinel monitor mymaster valkey.valkey-replicated-w-sentinel.svc.cluster.local 6379 2
+      sentinel announce-ip valkey.valkey-replicated-w-sentinel.svc.cluster.local
+      sentinel down-after-milliseconds mymaster 60000
+      sentinel failover-timeout mymaster 180000
+      sentinel parallel-syncs mymaster 1
+      sentinel resolve-hostnames yes
+      sentinel announce-hostnames yes
+      # Sentinel authenticates to the master:
+      sentinel auth-pass mymaster ${PW}
+      requirepass ${PW}
+      EOF
+
+      exec valkey-server /opt/bitnami/valkey-sentinel/sentinel-conf/sentinel.conf --sentinel
