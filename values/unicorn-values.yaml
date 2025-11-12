@@ -4,13 +4,13 @@
 image:
   registry: quay.io
   repository: rfcurated/valkey/valkey
-  tag: 8.1.4-jammy-fips-rfcurated
+  tag: 9.0.0-jammy-fips-rfcurated
 
 sentinel:
   image:  # Unicorn flavor option DNE
     registry: quay.io
     repository: rfcurated/valkey-sentinel
-    tag: 8.1.4-jammy-bnt-fips-rfcurated
+    tag: 9.0.0-jammy-bnt-fips-rfcurated
 
 metrics:
   image:
