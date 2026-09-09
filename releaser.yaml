@@ -7,4 +7,4 @@ flavors:
     version: 8.1.3-uds.5
   - name: unicorn
     # renovate-uds: datasource=docker depName=cgr.dev/defenseunicorns.com/valkey-iamguarded extractVersion=^(?<version>\d+\.\d+\.\d+)?$
-    version: 8.1.10-uds.0
+    version: 9.1.2-uds.0

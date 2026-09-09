@@ -41,9 +41,9 @@ components:
         valuesFiles:
           - ./values/unicorn-values.yaml
     images:
-      - cgr.dev/defenseunicorns.com/valkey-iamguarded:v8.1.10
+      - cgr.dev/defenseunicorns.com/valkey-iamguarded:v9.1.2
       - cgr.dev/defenseunicorns.com/prometheus-redis-exporter-iamguarded:v1.91.1
-      - cgr.dev/defenseunicorns.com/valkey-sentinel-iamguarded:v8.1.10
+      - cgr.dev/defenseunicorns.com/valkey-sentinel-iamguarded:v9.1.2
 
   - name: valkey-redis-uri-output
     required: false
