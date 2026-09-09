@@ -16,4 +16,4 @@ metrics:
   image:
     registry: cgr.dev
     repository: defenseunicorns.com/prometheus-redis-exporter-iamguarded
-    tag: v1.90.0
+    tag: v1.91.1
